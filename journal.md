@@ -169,6 +169,41 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
 
 ---
 
+## 📢 Update: September 30, 2026 — Live Scrolling Ticker & Telegram Bot Integration
+
+### 1. ESPN-Style Lower-Third Scrolling Ticker
+* Added a dedicated announcement ticker (`.ticker-bar`) docked right above the footer navigation in [`app.py`](file:///home/jrl/Projects/Digital_Signage/app.py).
+* **Styling**:
+  * Glowing left badge (`📢 ANNOUNCEMENT` in electric neon green when active, `MCSC NEWS` in aquatic blue for default motto).
+  * Smooth compositor-only CSS marquee animation (`@keyframes ticker-scroll`) with dynamic duration calculation based on message character count for a natural, readable crawl speed.
+  * Preserves the **zero-scroll guarantee** on both **1080p** and **4K UHD** displays (adjusted `records-grid` `max-height` so Senior Girls 21 events fit with zero scrollbars).
+* **Live In-Place Updates**:
+  * Configured Streamlit `enableStaticServing = true` in [`.streamlit/config.toml`](file:///home/jrl/Projects/Digital_Signage/.streamlit/config.toml).
+  * Client-side JavaScript polls `/app/static/ticker.json` every 10 seconds. New messages from coaches appear on screen live **without reloading the page or causing flicker**.
+
+### 2. Telegram Bot Daemon (`ticker_bot.py`)
+* Developed a lightweight, zero-external-dependency Telegram bot daemon running via standard library `urllib` and `json`.
+* **Outbound Long-Polling**: Works behind pool facility guest Wi-Fi, NAT, and firewalls without requiring open router ports or public domains.
+* **Commands**:
+  * Any plain text message: Instantly posts that announcement to the live TV ticker.
+  * `/status`: Displays current message, author, and timestamp.
+  * `/clear` or `/stop`: Resets the ticker back to the default team motto.
+  * `/motto`: Checks the active default team motto.
+  * `/setmotto <text>`: Changes the team motto directly from Telegram and saves to config.
+  * `/addcoach <chat_id>`: Whitelists assistant coaches directly from Telegram.
+  * `/help`: Displays command guide.
+* **Security & Whitelist**:
+  * Implemented first-time auto-claim: the first coach to message the bot is registered as primary administrator.
+  * Unauthorized users receive their Chat ID with instructions to contact the administrator.
+  * `bot_config.json` added to [`.gitignore`](file:///home/jrl/Projects/Digital_Signage/.gitignore) to protect bot API tokens. Template provided in [`bot_config.example.json`](file:///home/jrl/Projects/Digital_Signage/bot_config.example.json).
+
+### 3. Production Readiness & Systemd Service
+* Created [`systemd/swim-ticker-bot.service`](file:///home/jrl/Projects/Digital_Signage/systemd/swim-ticker-bot.service) for automatic background launch on Raspberry Pi boot.
+* Updated [`sync.sh`](file:///home/jrl/Projects/Digital_Signage/sync.sh) to include static ticker files and bot scripts.
+* Verified end-to-end locally in `.venv` with live Telegram messaging. Feature branch `feature/telegram-ticker` staged for field verification on physical pool TV kiosk.
+
+---
+
 ## 🔮 Next Steps & Future Ideas
 
 1. **Web-Based Meet Upload Portal (Top Priority Next Feature)**:
@@ -178,8 +213,7 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
    - Includes a one-click **"Approve & Update Board"** button that executes `pipeline.py` and refreshes the live TV board automatically, completely eliminating the need for terminal commands or SSH.
    - Optional PIN or simple admin password protection.
 2. **Retired Record Styling**: For the 9-10 girls 25 back record (Brooklyn Williams), add a distinctive teal border, a "RETIRED" badge, and update `pipeline.py` to prevent overwriting.
-3. **Scrolling Announcement Ticker**: Add an ESPN-style scrolling ticker above the footer for practice schedules and announcements.
-4. **LCM (Long Course Meters)**: Support for summer 50m long course season.
+3. **LCM (Long Course Meters)**: Support for summer 50m long course season.
 
 ---
 

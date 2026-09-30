@@ -31,9 +31,27 @@ st.set_page_config(
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 JSON_PATH = os.path.join(SCRIPT_DIR, "records.json")
 DB_PATH = os.path.join(SCRIPT_DIR, "records.sqlite")
+TICKER_PATH = os.path.join(SCRIPT_DIR, "static", "ticker.json")
 LOGO_PNG_PATH = os.path.join(SCRIPT_DIR, "logo_transparent.png")
 ORIG_LOGO_PATH = os.path.join(SCRIPT_DIR, "MCSC Fly Logo2.png")
 CYCLE_INTERVAL_SEC = 12  # Seconds per age group on screen
+
+
+def load_ticker_data() -> Dict[str, Any]:
+    """Loads ticker announcement data from static/ticker.json."""
+    if os.path.exists(TICKER_PATH):
+        try:
+            with open(TICKER_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {
+        "text": "🏊 Welcome to Marshall County Swim Club • Home of the Fly • Hard Work Pays Off • Go MCSC!",
+        "active": True,
+        "is_default": True,
+        "updated_at": "",
+        "author": "System"
+    }
 
 
 @st.cache_data
@@ -143,6 +161,11 @@ def render_kiosk_app():
 
     # Convert groups data to JSON for client-side rotation
     groups_json = json.dumps(groups)
+
+    # Load ticker data
+    ticker_data = load_ticker_data()
+    ticker_json = json.dumps(ticker_data)
+    initial_ticker_text = ticker_data.get("text", "")
 
     # Logo HTML
     if logo_b64:
@@ -359,7 +382,7 @@ def render_kiosk_app():
                 gap: clamp(6px, 1vh, 12px) clamp(12px, 1.4vw, 18px);
                 width: 100%;
                 height: 100%;
-                max-height: calc(100vh - 150px);
+                max-height: calc(100vh - 195px);
             }}
 
             /* Record Card */
@@ -440,6 +463,88 @@ def render_kiosk_app():
                 border-radius: 4px;
                 text-transform: uppercase;
                 box-shadow: 0 0 10px var(--green-glow);
+            }}
+
+            /* Scrolling Announcement Ticker */
+            .ticker-bar {{
+                display: flex;
+                align-items: center;
+                height: clamp(30px, 3.5vh, 38px);
+                background: rgba(13, 21, 38, 0.95);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 0 10px;
+                margin-top: 6px;
+                gap: 12px;
+                flex-shrink: 0;
+                overflow: hidden;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+            }}
+
+            .ticker-badge {{
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 3px 10px;
+                border-radius: 5px;
+                font-size: clamp(10px, 1.2vh, 12px);
+                font-weight: 900;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                flex-shrink: 0;
+                z-index: 2;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+            }}
+
+            .badge-announcement {{
+                background: linear-gradient(135deg, var(--pantone-green), #2db51a);
+                color: #070c18;
+                box-shadow: 0 0 12px var(--green-glow);
+            }}
+
+            .badge-default {{
+                background: linear-gradient(135deg, var(--pantone-blue), #0077b6);
+                color: #ffffff;
+                box-shadow: 0 0 10px var(--blue-glow);
+            }}
+
+            .pulse-dot {{
+                width: 7px;
+                height: 7px;
+                background-color: #ef4444;
+                border-radius: 50%;
+                display: inline-block;
+                box-shadow: 0 0 6px #ef4444;
+            }}
+
+            .ticker-track {{
+                flex: 1;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                align-items: center;
+                mask-image: linear-gradient(to right, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
+            }}
+
+            .ticker-content {{
+                display: inline-block;
+                white-space: nowrap;
+                padding-left: 100%;
+                font-size: clamp(13px, 1.6vh, 17px);
+                font-weight: 700;
+                color: #f1f5f9;
+                letter-spacing: 0.5px;
+                will-change: transform;
+            }}
+
+            @keyframes ticker-scroll {{
+                0% {{
+                    transform: translate3d(0, 0, 0);
+                }}
+                100% {{
+                    transform: translate3d(-100%, 0, 0);
+                }}
             }}
 
             /* Navigation Pills Footer */
@@ -540,7 +645,7 @@ def render_kiosk_app():
                 }}
                 .records-grid {{
                     gap: clamp(12px, 1.2vh, 24px) clamp(20px, 1.4vw, 36px) !important;
-                    max-height: calc(100vh - 270px) !important;
+                    max-height: calc(100vh - 350px) !important;
                 }}
                 .record-card {{
                     border-radius: 16px !important;
@@ -563,6 +668,26 @@ def render_kiosk_app():
                     font-size: 20px !important;
                     padding: 4px 14px !important;
                     border-radius: 6px !important;
+                }}
+                .ticker-bar {{
+                    height: 56px !important;
+                    border-radius: 12px !important;
+                    padding: 0 18px !important;
+                    margin-top: 12px !important;
+                    gap: 18px !important;
+                }}
+                .ticker-badge {{
+                    font-size: 20px !important;
+                    padding: 6px 18px !important;
+                    border-radius: 8px !important;
+                }}
+                .pulse-dot {{
+                    width: 12px !important;
+                    height: 12px !important;
+                }}
+                .ticker-content {{
+                    font-size: 26px !important;
+                    letter-spacing: 1px !important;
                 }}
                 footer {{
                     padding-top: 18px !important;
@@ -611,6 +736,13 @@ def render_kiosk_app():
             <main id="slide-content">
                 <div id="records-container" class="records-grid"></div>
             </main>
+
+            <div id="ticker-bar" class="ticker-bar">
+                <div id="ticker-badge" class="ticker-badge badge-default">MCSC NEWS</div>
+                <div class="ticker-track">
+                    <div id="ticker-text" class="ticker-content">{initial_ticker_text}</div>
+                </div>
+            </div>
 
             <footer>
                 <div id="pills-container" class="pill-list"></div>
@@ -808,6 +940,57 @@ def render_kiosk_app():
             setTimeout(() => {{
                 window.location.reload();
             }}, 30 * 60 * 1000);
+
+            // Scrolling Ticker Management
+            const tickerTextEl = document.getElementById("ticker-text");
+            const tickerBadgeEl = document.getElementById("ticker-badge");
+            const initialTickerData = {ticker_json};
+            let currentTickerText = initialTickerData.text || "";
+
+            function applyTickerData(data) {{
+                if (!data || !data.text || !data.active) {{
+                    tickerTextEl.textContent = "🏊 Welcome to Marshall County Swim Club • Home of the Fly • Hard Work Pays Off • Go MCSC!";
+                    tickerBadgeEl.textContent = "MCSC NEWS";
+                    tickerBadgeEl.className = "ticker-badge badge-default";
+                }} else {{
+                    tickerTextEl.textContent = data.text;
+                    if (data.is_default) {{
+                        tickerBadgeEl.textContent = "MCSC NEWS";
+                        tickerBadgeEl.className = "ticker-badge badge-default";
+                    }} else {{
+                        tickerBadgeEl.innerHTML = '<span class="pulse-dot"></span> ANNOUNCEMENT';
+                        tickerBadgeEl.className = "ticker-badge badge-announcement";
+                    }}
+                }}
+
+                // Adaptive speed: comfortable reading pace (~14 characters per second across screen)
+                const charLen = Math.max(30, tickerTextEl.textContent.length);
+                const duration = Math.max(16, Math.min(65, Math.round(charLen / 3.5)));
+
+                tickerTextEl.style.animation = "none";
+                void tickerTextEl.offsetWidth; // Force reflow to cleanly restart animation
+                tickerTextEl.style.animation = `ticker-scroll ${{duration}}s linear infinite`;
+            }}
+
+            async function checkTickerUpdates() {{
+                try {{
+                    const resp = await fetch('/app/static/ticker.json?t=' + Date.now());
+                    if (resp.ok) {{
+                        const data = await resp.json();
+                        const newText = (data.text || "").trim();
+                        if (newText !== currentTickerText) {{
+                            currentTickerText = newText;
+                            applyTickerData(data);
+                        }}
+                    }}
+                }} catch (e) {{
+                    // Quietly ignore network failures in offline / kiosk mode
+                }}
+            }}
+
+            // Initialize ticker & poll for updates every 10 seconds
+            applyTickerData(initialTickerData);
+            setInterval(checkTickerUpdates, 10000);
 
             // Initialize
             createPills();

@@ -20,3 +20,8 @@ __pycache__/
 # Local testing scratch
 scratch/
 tmp/
+
+# Secrets & Bot Config
+bot_config.json
+.env
+*.local

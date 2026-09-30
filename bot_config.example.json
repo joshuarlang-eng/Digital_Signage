@@ -1,0 +1,6 @@
+{
+  "bot_token": "YOUR_TELEGRAM_BOT_TOKEN_HERE",
+  "allowed_chat_ids": [],
+  "default_message": "🏊 Marshall County Swim Club • Home of the Fly • Hard Work Pays Off • Go MCSC!",
+  "ticker_file": "static/ticker.json"
+}

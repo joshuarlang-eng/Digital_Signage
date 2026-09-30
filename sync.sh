@@ -14,6 +14,9 @@ FILES=(
     "records.sqlite"
     "SCY-Records.csv"
     "logo_transparent.png"
+    "static"
+    "ticker_bot.py"
+    "bot_config.json"
 )
 
 EXISTING=()
