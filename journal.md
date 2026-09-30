@@ -207,14 +207,26 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
   * Ticker and Telegram bot (`@mcsc_ticker_bot`) verified live on the physical 75" Samsung pool TV.
   * Coach Telegram messages update the screen in real-time within 10 seconds.
   * `/clear`, `/motto`, and `/setmotto` working smoothly.
-* **1080p @ 60 FPS Resolution Transition**:
-  * Diagnosed that the TV was negotiating 4K @ 30 Hz (`mode: 3840x2160 @ 30.00 Hz`), causing horizontal motion judder.
+* **1080p @ 60 FPS Resolution Transition (v2.2)**:
+  * Diagnosed that the TV was negotiating 4K @ 30 Hz (`mode: 3840x2160 @ 30.00 Hz`), causing horizontal motion judder in the ticker and slide transitions.
   * Installed `wlr-randr` on the Pi and updated [`systemd/kiosk-browser.sh`](file:///home/jrl/Projects/Digital_Signage/systemd/kiosk-browser.sh) to lock the HDMI-A-1 output to `1920x1080 @ 60.00 Hz`.
-  * The TV's internal 4K hardware upscaler automatically stretches the 1080p signal to fill the 75" panel, while animations run at a locked, buttery 60 FPS with low temperature (~50°C) and low memory bandwidth.
-* **Milestone Releases**:
-  * **v2.1**: Live ESPN-style scrolling ticker, Web Animations API compositor rendering, and Telegram bot daemon (`@mcsc_ticker_bot`).
-  * **v2.2**: 1080p @ 60 FPS output locking via `wlr-randr` in [`systemd/kiosk-browser.sh`](file:///home/jrl/Projects/Digital_Signage/systemd/kiosk-browser.sh) for silky-smooth physical TV animations.
-  * **v2.3**: Card layout redesign: date formatted as 4-digit year inline with swimmer name (`Brooks Lang (2024)`), increased spacing gap, and enlarged swimmer typography for visibility from across the pool deck.
+  * The TV's internal 4K hardware upscaler automatically stretches the 1080p signal to fill the 75" panel, while animations run at a locked, buttery 60 FPS with low temperature (~50°C) and minimal memory bandwidth.
+
+### 5. Card Layout Redesign & Typography Scaling (v2.3) ✅
+* **Problem**: Each record card originally had 3 vertical lines on the left side: Event Name, Swimmer Name, and Full Date (`YYYY-MM-DD`). This squeezed the vertical space and forced the swimmer's name font size down to ~16px, making it difficult to read from 25–30+ feet across the pool deck.
+* **Inline Year Formatting**:
+  * Extracted the 4-digit record year via `formatRecordYear()` in [`app.py`](file:///home/jrl/Projects/Digital_Signage/app.py) and placed it inline directly beside the swimmer's name (e.g. `Brooks Lang (2024)`).
+  * Styled `.swimmer-year` in muted slate (`var(--text-muted)` at `0.72em`) to keep the primary visual focus on the swimmer's name while keeping the achievement year cleanly identifiable.
+* **Typography & Spacing**:
+  * Bumped `.swimmer-name` font size up to `clamp(18px, 2.7vh, 27px)` (and up to `48px` in 4K).
+  * Expanded spacing gap between name and year to `clamp(14px, 1.4vw, 22px)` (and `28px` in 4K) for clear visual separation.
+  * Widened `.event-info` maximum width from `58%` to `65%` to prevent premature truncation of longer names, while retaining `flex-shrink: 0` on `.time-info`.
+  * Preserves the **zero-scroll guarantee** on the dense 21-event Senior Girls slide.
+
+* **Milestone Releases Summary**:
+  * **[`v2.1`](https://github.com/joshuarlang-eng/Digital_Signage/releases/tag/v2.1)**: Live ESPN-style scrolling ticker, Web Animations API GPU compositor rendering, and Telegram bot daemon (`@mcsc_ticker_bot`).
+  * **[`v2.2`](https://github.com/joshuarlang-eng/Digital_Signage/releases/tag/v2.2)**: 1080p @ 60 FPS output locking via `wlr-randr` in [`systemd/kiosk-browser.sh`](file:///home/jrl/Projects/Digital_Signage/systemd/kiosk-browser.sh) for silky-smooth physical TV animations.
+  * **[`v2.3`](https://github.com/joshuarlang-eng/Digital_Signage/releases/tag/v2.3)**: Card layout redesign: date formatted as 4-digit year inline with swimmer name (`Brooks Lang (2024)`), increased spacing gap, and enlarged swimmer typography for visibility from across the pool deck.
 
 ---
 
@@ -233,6 +245,7 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
 
 ## 🚀 Quick Commands for Daily Operations
 
+### General Operations
 * **Activate Virtualenv**:
   ```bash
   source "/home/jrl/Projects/Digital_Signage/.venv/bin/activate"
@@ -255,5 +268,32 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
   git commit -m "Describe your update"
   git push origin main
   ```
+
+### Telegram Bot Management (`@mcsc_ticker_bot`)
+* **Add an Assistant Coach**:
+  1. Have the assistant coach message `@mcsc_ticker_bot` on Telegram and copy their Chat ID from the "Access Denied" reply.
+  2. In your own chat with the bot, send:
+     ```text
+     /addcoach <Chat_ID>
+     ```
+  3. The bot immediately updates `bot_config.json` on the Pi and authorizes the coach.
+* **Post an Announcement**: Simply type the text message directly in Telegram.
+* **Reset Ticker**: Send `/clear` or `/stop` to return to the default team motto.
+* **Change Default Motto**: Send `/setmotto <New Motto Text>`.
+
+### Raspberry Pi Service Diagnostics (via SSH)
+```bash
+# Check status of all digital signage services
+ssh pi@swim-signage "systemctl status swim-records-web swim-records-kiosk swim-ticker-bot"
+
+# Restart all services
+ssh pi@swim-signage "sudo systemctl restart swim-records-web swim-records-kiosk swim-ticker-bot"
+
+# View live web app logs
+ssh pi@swim-signage "journalctl -u swim-records-web.service -f"
+
+# View live Telegram ticker bot logs
+ssh pi@swim-signage "journalctl -u swim-ticker-bot.service -f"
+```
 
 
