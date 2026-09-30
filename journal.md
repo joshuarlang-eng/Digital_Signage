@@ -202,52 +202,34 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
 * Updated [`sync.sh`](file:///home/jrl/Projects/Digital_Signage/sync.sh) to include static ticker files and bot scripts.
 * Verified end-to-end locally in `.venv` with live Telegram messaging. Feature branch `feature/telegram-ticker` staged for field verification on physical pool TV kiosk.
 
-### 4. Pool Field Verification & Deployment Guide (For Next Session)
-* **Current Status**:
-  * Development and local testing completed on branch `feature/telegram-ticker` (pushed to GitHub).
-  * `main` branch remains clean at release `v2.0` until visually verified on pool TV.
-  * Active Bot: `@mcsc_ticker_bot`. Primary admin: Josh (Chat ID: `8978703153` registered in `bot_config.json`).
-* **Resource Profile Verified**:
-  * **Daemon CPU**: 0.0% idle (long-polling socket I/O wakes only on incoming message).
-  * **Daemon RAM**: ~26 MB RSS (safely within 781 MB available RAM and 1024 MB swap).
-  * **Chromium GPU**: Compositor-only `transform: translate3d` with `will-change: transform`. No blur shaders, zero 60 FPS JS layout loops.
-* **Deployment Steps (When at the Pool)**:
-  1. Sync updated code and config to Pi:
-     ```bash
-     ./sync.sh
-     rsync -avz bot_config.json pi@swim-signage:/home/pi/Digital-Signage/
-     rsync -avz app.py pi@swim-signage:/home/pi/Digital-Signage/
-     rsync -avz .streamlit/config.toml pi@swim-signage:/home/pi/Digital-Signage/.streamlit/
-     ```
-  2. Install and start bot service on the Pi:
-     ```bash
-     ssh pi@swim-signage "sudo cp /home/pi/Digital-Signage/systemd/swim-ticker-bot.service /etc/systemd/system/ && sudo systemctl daemon-reload && sudo systemctl enable --now swim-ticker-bot.service && sudo systemctl restart swim-records-web.service"
-     ```
-  3. Verify on TV:
-     - Check default team motto displayed with `MCSC NEWS` badge.
-     - Send a message to `@mcsc_ticker_bot` from phone; verify text updates on TV within 10s.
-     - Confirm Senior Girls (21 events) still fits 100% full-screen with zero scrollbars on 4K display.
-  4. Merge into `main` after verification:
-     ```bash
-     git checkout main
-     git merge feature/telegram-ticker
-     git push origin main
-     git tag -a v2.1 -m "Release v2.1: Live scrolling ticker & Telegram bot integration"
-     git push origin v2.1
-     ```
+### 4. Pool Field Verification & 1080p @ 60 FPS Switch ✅
+* **Field Test Outcome**:
+  * Ticker and Telegram bot (`@mcsc_ticker_bot`) verified live on the physical 75" Samsung pool TV.
+  * Coach Telegram messages update the screen in real-time within 10 seconds.
+  * `/clear`, `/motto`, and `/setmotto` working smoothly.
+* **1080p @ 60 FPS Resolution Transition**:
+  * Diagnosed that the TV was negotiating 4K @ 30 Hz (`mode: 3840x2160 @ 30.00 Hz`), causing horizontal motion judder.
+  * Installed `wlr-randr` on the Pi and updated [`systemd/kiosk-browser.sh`](file:///home/jrl/Projects/Digital_Signage/systemd/kiosk-browser.sh) to lock the HDMI-A-1 output to `1920x1080 @ 60.00 Hz`.
+  * The TV's internal 4K hardware upscaler automatically stretches the 1080p signal to fill the 75" panel, while animations run at a locked, buttery 60 FPS with low temperature (~50°C) and low memory bandwidth.
+* **Milestone Release**: Merged `feature/telegram-ticker` into `main` and tagged release **`v2.1`**.
 
 ---
 
 ## 🔮 Next Steps & Future Ideas
 
-1. **Web-Based Meet Upload Portal (Top Priority Next Feature)**:
+1. **Card Layout Redesign — Inline Year & Enlarged Swimmer Names (Next Priority)**:
+   * Currently, each record card has 3 vertical lines on the left: Event Name, Swimmer Name, Date.
+   * Redesign to display the date as just a year inline beside the swimmer's name (e.g. **Brooks Lang ('26)** or **Brooks Lang (2026)**).
+   * Eliminating the 3rd vertical line frees up massive vertical headroom inside every card.
+   * Allows scaling up the swimmer name and time font sizes significantly so they pop boldly from 25–30+ feet across the pool deck.
+2. **Web-Based Meet Upload Portal**:
    - Build a lightweight web upload page (e.g. `/admin` or dedicated route) accessible from any phone or laptop over the pool Wi-Fi / Tailscale.
    - Allows coaches to drag and drop a new Hy-Tek `.cl2` meet file directly.
    - Displays an instant in-browser preview of all broken records and time drops.
    - Includes a one-click **"Approve & Update Board"** button that executes `pipeline.py` and refreshes the live TV board automatically, completely eliminating the need for terminal commands or SSH.
    - Optional PIN or simple admin password protection.
-2. **Retired Record Styling**: For the 9-10 girls 25 back record (Brooklyn Williams), add a distinctive teal border, a "RETIRED" badge, and update `pipeline.py` to prevent overwriting.
-3. **LCM (Long Course Meters)**: Support for summer 50m long course season.
+3. **Retired Record Styling**: For the 9-10 girls 25 back record (Brooklyn Williams), add a distinctive teal border, a "RETIRED" badge, and update `pipeline.py` to prevent overwriting.
+4. **LCM (Long Course Meters)**: Support for summer 50m long course season.
 
 ---
 

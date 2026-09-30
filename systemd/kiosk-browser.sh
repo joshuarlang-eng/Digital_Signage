@@ -31,10 +31,10 @@ fi
 # Clean up any stale crash flags or locks from sudden power-offs
 rm -rf ~/.config/chromium/Singleton* /tmp/chromium-cache
 
-# Note: Do NOT use --force-device-scale-factor with Cage compositor on Wayland.
-# Cage does not implement client buffer upscaling, so scale factor > 1 causes
-# Chromium to render a smaller surface placed in the top-left quadrant of 4K TVs.
-# Scaling is handled natively via CSS media queries in app.py.
+# Set 1080p @ 60 FPS on HDMI-A-1 for ultra-smooth 60Hz compositor and cool operation
+if command -v wlr-randr >/dev/null 2>&1; then
+    wlr-randr --output HDMI-A-1 --mode 1920x1080@60Hz || true
+fi
 
 # Launch Chromium in dedicated kiosk mode on Wayland
 exec "$CHROME_BIN" \
