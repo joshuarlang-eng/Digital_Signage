@@ -523,28 +523,18 @@ def render_kiosk_app():
                 position: relative;
                 display: flex;
                 align-items: center;
-                mask-image: linear-gradient(to right, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
-                -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
             }}
 
             .ticker-content {{
                 display: inline-block;
                 white-space: nowrap;
-                padding-left: 100%;
                 font-size: clamp(13px, 1.6vh, 17px);
                 font-weight: 700;
                 color: #f1f5f9;
                 letter-spacing: 0.5px;
                 will-change: transform;
-            }}
-
-            @keyframes ticker-scroll {{
-                0% {{
-                    transform: translate3d(0, 0, 0);
-                }}
-                100% {{
-                    transform: translate3d(-100%, 0, 0);
-                }}
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
             }}
 
             /* Navigation Pills Footer */
@@ -946,6 +936,7 @@ def render_kiosk_app():
             const tickerBadgeEl = document.getElementById("ticker-badge");
             const initialTickerData = {ticker_json};
             let currentTickerText = initialTickerData.text || "";
+            let tickerAnimation = null;
 
             function applyTickerData(data) {{
                 if (!data || !data.text || !data.active) {{
@@ -963,13 +954,33 @@ def render_kiosk_app():
                     }}
                 }}
 
-                // Adaptive speed: comfortable reading pace (~14 characters per second across screen)
-                const charLen = Math.max(30, tickerTextEl.textContent.length);
-                const duration = Math.max(16, Math.min(65, Math.round(charLen / 3.5)));
+                if (tickerAnimation) {{
+                    tickerAnimation.cancel();
+                    tickerAnimation = null;
+                }}
 
-                tickerTextEl.style.animation = "none";
-                void tickerTextEl.offsetWidth; // Force reflow to cleanly restart animation
-                tickerTextEl.style.animation = `ticker-scroll ${{duration}}s linear infinite`;
+                // Wait 60ms for layout to settle, then launch native GPU-composited animation
+                setTimeout(() => {{
+                    const trackEl = document.querySelector(".ticker-track");
+                    const trackWidth = trackEl ? trackEl.offsetWidth : window.innerWidth;
+                    const textWidth = Math.max(100, tickerTextEl.scrollWidth || tickerTextEl.offsetWidth || 800);
+
+                    const startX = trackWidth + 10;
+                    const endX = -(textWidth + 40);
+                    const totalDist = startX - endX;
+
+                    // Broadcast velocity: ~75px per second eliminates 30Hz frame judder on 4K TVs
+                    const durationMs = Math.round((totalDist / 75) * 1000);
+
+                    tickerAnimation = tickerTextEl.animate([
+                        {{ transform: `translate3d(${{startX}}px, 0, 0)` }},
+                        {{ transform: `translate3d(${{endX}}px, 0, 0)` }}
+                    ], {{
+                        duration: durationMs,
+                        iterations: Infinity,
+                        easing: 'linear'
+                    }});
+                }}, 60);
             }}
 
             async function checkTickerUpdates() {{
