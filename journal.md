@@ -171,9 +171,14 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
 
 ## 🔮 Next Steps & Future Ideas
 
-1. **Scrolling Announcement Ticker**: Add an ESPN-style scrolling ticker above the footer for practice schedules and announcements.
-2. **Retired Record Styling**: For the 9-10 girls 25 back record (Brooklyn Williams), add a distinctive teal border and update `pipeline.py` to prevent overwriting.
-3. **Web Upload Portal**: Simple web interface for dragging and dropping `.cl2` meet files directly from a phone or laptop.
+1. **Web-Based Meet Upload Portal (Top Priority Next Feature)**:
+   - Build a lightweight web upload page (e.g. `/admin` or dedicated route) accessible from any phone or laptop over the pool Wi-Fi / Tailscale.
+   - Allows coaches to drag and drop a new Hy-Tek `.cl2` meet file directly.
+   - Displays an instant in-browser preview of all broken records and time drops.
+   - Includes a one-click **"Approve & Update Board"** button that executes `pipeline.py` and refreshes the live TV board automatically, completely eliminating the need for terminal commands or SSH.
+   - Optional PIN or simple admin password protection.
+2. **Retired Record Styling**: For the 9-10 girls 25 back record (Brooklyn Williams), add a distinctive teal border, a "RETIRED" badge, and update `pipeline.py` to prevent overwriting.
+3. **Scrolling Announcement Ticker**: Add an ESPN-style scrolling ticker above the footer for practice schedules and announcements.
 4. **LCM (Long Course Meters)**: Support for summer 50m long course season.
 
 ---
