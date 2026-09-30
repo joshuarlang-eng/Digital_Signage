@@ -202,6 +202,40 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
 * Updated [`sync.sh`](file:///home/jrl/Projects/Digital_Signage/sync.sh) to include static ticker files and bot scripts.
 * Verified end-to-end locally in `.venv` with live Telegram messaging. Feature branch `feature/telegram-ticker` staged for field verification on physical pool TV kiosk.
 
+### 4. Pool Field Verification & Deployment Guide (For Next Session)
+* **Current Status**:
+  * Development and local testing completed on branch `feature/telegram-ticker` (pushed to GitHub).
+  * `main` branch remains clean at release `v2.0` until visually verified on pool TV.
+  * Active Bot: `@mcsc_ticker_bot`. Primary admin: Josh (Chat ID: `8978703153` registered in `bot_config.json`).
+* **Resource Profile Verified**:
+  * **Daemon CPU**: 0.0% idle (long-polling socket I/O wakes only on incoming message).
+  * **Daemon RAM**: ~26 MB RSS (safely within 781 MB available RAM and 1024 MB swap).
+  * **Chromium GPU**: Compositor-only `transform: translate3d` with `will-change: transform`. No blur shaders, zero 60 FPS JS layout loops.
+* **Deployment Steps (When at the Pool)**:
+  1. Sync updated code and config to Pi:
+     ```bash
+     ./sync.sh
+     rsync -avz bot_config.json pi@swim-signage:/home/pi/Digital-Signage/
+     rsync -avz app.py pi@swim-signage:/home/pi/Digital-Signage/
+     rsync -avz .streamlit/config.toml pi@swim-signage:/home/pi/Digital-Signage/.streamlit/
+     ```
+  2. Install and start bot service on the Pi:
+     ```bash
+     ssh pi@swim-signage "sudo cp /home/pi/Digital-Signage/systemd/swim-ticker-bot.service /etc/systemd/system/ && sudo systemctl daemon-reload && sudo systemctl enable --now swim-ticker-bot.service && sudo systemctl restart swim-records-web.service"
+     ```
+  3. Verify on TV:
+     - Check default team motto displayed with `MCSC NEWS` badge.
+     - Send a message to `@mcsc_ticker_bot` from phone; verify text updates on TV within 10s.
+     - Confirm Senior Girls (21 events) still fits 100% full-screen with zero scrollbars on 4K display.
+  4. Merge into `main` after verification:
+     ```bash
+     git checkout main
+     git merge feature/telegram-ticker
+     git push origin main
+     git tag -a v2.1 -m "Release v2.1: Live scrolling ticker & Telegram bot integration"
+     git push origin v2.1
+     ```
+
 ---
 
 ## 🔮 Next Steps & Future Ideas
