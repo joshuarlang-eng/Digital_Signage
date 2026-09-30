@@ -410,7 +410,8 @@ def render_kiosk_app():
                 display: flex;
                 flex-direction: column;
                 gap: 2px;
-                max-width: 58%;
+                max-width: 65%;
+                min-width: 0;
             }}
 
             .event-name {{
@@ -422,18 +423,28 @@ def render_kiosk_app():
             }}
 
             .swimmer-name {{
-                font-size: clamp(16px, 2.3vh, 24px);
+                font-size: clamp(18px, 2.7vh, 27px);
                 font-weight: 700;
                 color: #ffffff;
                 white-space: nowrap;
                 overflow: hidden;
-                text-overflow: ellipsis;
+                display: flex;
+                align-items: baseline;
+                gap: clamp(14px, 1.4vw, 22px);
             }}
 
-            .swimmer-date {{
-                font-size: clamp(11px, 1.4vh, 15px);
+            .swimmer-name-text {{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }}
+
+            .swimmer-year {{
+                font-size: 0.72em;
+                font-weight: 600;
                 color: var(--text-muted);
                 letter-spacing: 0.5px;
+                flex-shrink: 0;
             }}
 
             .time-info {{
@@ -646,10 +657,11 @@ def render_kiosk_app():
                     font-size: clamp(28px, 2.2vh, 46px) !important;
                 }}
                 .swimmer-name {{
-                    font-size: clamp(26px, 2.0vh, 42px) !important;
+                    font-size: clamp(32px, 2.6vh, 48px) !important;
+                    gap: 28px !important;
                 }}
-                .swimmer-date {{
-                    font-size: clamp(18px, 1.3vh, 26px) !important;
+                .swimmer-year {{
+                    font-size: 0.72em !important;
                 }}
                 .record-time {{
                     font-size: clamp(48px, 3.6vh, 80px) !important;
@@ -793,6 +805,12 @@ def render_kiosk_app():
                 }}
             }}
 
+            function formatRecordYear(dateStr) {{
+                if (!dateStr) return "";
+                const m = String(dateStr).match(/(19[0-9][0-9]|20[0-9][0-9])/);
+                return m ? m[1] : "";
+            }}
+
             // Render Current Slide
             function renderSlide(index) {{
                 if (!groups || groups.length === 0) {{
@@ -826,14 +844,17 @@ def render_kiosk_app():
                     group.records.forEach(rec => {{
                         const newClass = rec.is_new ? " is-new-record" : "";
                         const newBadge = rec.is_new ? "<span class='new-badge'>NEW!</span>" : "";
-                        const dateStr = rec.date ? rec.date : "";
+                        const yr = formatRecordYear(rec.date);
+                        const yearHtml = yr ? `<span class="swimmer-year">(${{yr}})</span>` : "";
 
                         html += `
                             <div class="record-card${{newClass}}">
                                 <div class="event-info">
                                     <div class="event-name">${{rec.event}}</div>
-                                    <div class="swimmer-name" title="${{rec.name}}">${{rec.name}}</div>
-                                    <div class="swimmer-date">${{dateStr}}</div>
+                                    <div class="swimmer-name" title="${{rec.name}}">
+                                        <span class="swimmer-name-text">${{rec.name}}</span>
+                                        ${{yearHtml}}
+                                    </div>
                                 </div>
                                 <div class="time-info">
                                     <div class="record-time">${{rec.time_formatted}}</div>
