@@ -2,9 +2,8 @@
 
 **Date**: September 27, 2026  
 **Project**: MCSC Swim Team Digital Signage Board  
-**Target Device**: Raspberry Pi OS Lite (64-bit Debian Bookworm), Wayland (`cage`), Chromium Kiosk  
-**Working Directory**: `/home/jrl/Projects/Digital Signage V2` (Version 2)  
-**Baseline Directory**: `/home/jrl/Projects/Digital Signage` (Version 1 — preserved intact)
+**Working Directory**: `/home/jrl/Projects/Digital_Signage`  
+**GitHub Repository**: `https://github.com/joshuarlang-eng/Digital_Signage` (Release `v2.0`)  
 
 ---
 
@@ -140,29 +139,68 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
 
 ---
 
-## 🔮 Ideas & Potential Focus Areas for Version 2
+## 📌 Update: September 29–30, 2026 — 4K UHD Deployment, Zero-Package Capture & GitHub Migration
 
-When resuming work on Version 2, here are the top directions and feature ideas:
-1. **Scrolling Announcement Ticker**: Add an ESPN-style scrolling ticker above the footer for practice updates, meet schedules, and announcements. Can be updated directly from a smartphone browser via Tailscale!
-2. **Retired Record**: The 9-10 girls 25 back record held by Brooklyn Williams has been retired.  Add a teal border similar to the green new record border to this record card and update the pipeline script so this record is never updated.
-3. **LCM (Long Course Meters) vs. SCY (Short Course Yards)**: Toggle or separate mode for summer long-course season vs. winter short-course season.
+### 1. 4K Pool TV Scaling & "Top-Left Quarter" Bug Resolved
+* **Field Finding**: When plugged into the pool TV, HDMI negotiated native 4K UHD (`3840x2160`). At native resolution, previous 1080p pixel clamps (`clamp(16px, 2.2vh, 23px)`) caused typography and cards to render at 1x scale, taking up only ~35% of the screen.
+* **Diagnosed Failed Attempt**: Passing `--force-device-scale-factor=2` to Chromium caused the display to shrink into the **top-left quarter** of the screen.
+  - **Root Cause**: The Wayland compositor **Cage** (`/usr/bin/cage -s`) does not upscale client buffers. Chromium rendered a 1920×1080 Wayland surface which Cage placed 1:1 in the top-left quadrant of the 3840×2160 screen.
+* **The Solution (Pure CSS Media Queries)**:
+  - Reverted `--force-device-scale-factor` from [`systemd/kiosk-browser.sh`](file:///home/jrl/Projects/Digital_Signage/systemd/kiosk-browser.sh) so Chromium creates a native 3840×2160 fullscreen surface.
+  - Added `@media (min-width: 2500px) or (min-height: 1400px)` in [`app.py`](file:///home/jrl/Projects/Digital_Signage/app.py):
+    - Scaled typography: Event names (28–46px), swimmer names (26–42px), record times (48–80px), team title (42px), active banner (60px), clock (52px), nav pills (22px).
+    - Scaled logo height to 110px.
+    - Updated JavaScript row balancing in `renderSlide()` to use `minmax(150px, 240px)` on displays where `window.innerHeight > 1400`.
+  - Preserved **zero-scroll guarantee** across all 12 age groups (including 21-event Senior Girls) with 100% full-screen coverage.
+
+### 2. Live Verification on Raspberry Pi
+* Deployed updated `app.py` and `systemd/kiosk-browser.sh` via SSH/rsync over Tailscale (`pi@swim-signage`).
+* Restarted `swim-records-web.service` and `swim-records-kiosk.service`.
+* Captured native 4K screen render without installing any extra packages on the Pi (using local Chromium headless via Chrome DevTools Protocol against `http://swim-signage:8501`).
+* Saved full-resolution 3840×2160 capture to [`~/Pictures/swim_signage_4k_live.png`](file:///home/jrl/Pictures/swim_signage_4k_live.png).
+
+### 3. GitHub Migration & Directory Consolidation
+* Initialized Git repository tracking `main` branch.
+* Added clean `.gitignore` (excluding `.venv/`, `__pycache__/`, etc.).
+* Generated SSH key (`~/.ssh/id_rsa.pub`) and linked to user's GitHub account (`joshuarlang-eng`).
+* Pushed repository to **[https://github.com/joshuarlang-eng/Digital_Signage](https://github.com/joshuarlang-eng/Digital_Signage)**.
+* Tagged milestone release **`v2.0`** and pushed tag to GitHub.
+* Consolidated workspace: deleted redundant `~/Projects/Digital Signage` and renamed active directory to `~/Projects/Digital_Signage`.
 
 ---
 
-## 🚀 Quick Commands for Version 2
+## 🔮 Next Steps & Future Ideas
 
-* **Activate V2 Virtualenv**:
+1. **Scrolling Announcement Ticker**: Add an ESPN-style scrolling ticker above the footer for practice schedules and announcements.
+2. **Retired Record Styling**: For the 9-10 girls 25 back record (Brooklyn Williams), add a distinctive teal border and update `pipeline.py` to prevent overwriting.
+3. **Web Upload Portal**: Simple web interface for dragging and dropping `.cl2` meet files directly from a phone or laptop.
+4. **LCM (Long Course Meters)**: Support for summer 50m long course season.
+
+---
+
+## 🚀 Quick Commands for Daily Operations
+
+* **Activate Virtualenv**:
   ```bash
-  source "/home/jrl/Projects/Digital Signage V2/.venv/bin/activate"
+  source "/home/jrl/Projects/Digital_Signage/.venv/bin/activate"
   ```
-* **Run Web App**:
+* **Run Web App Locally**:
   ```bash
   streamlit run app.py
   ```
-* **Run Pipeline**:
+* **Process a New Swim Meet**:
   ```bash
-  python3 pipeline.py --init-only
-  # or with a meet file:
-  python3 pipeline.py --meet "/path/to/meet.cl2" --team MCSC
+  python3 pipeline.py --meet "/path/to/meet_results.cl2" --team MCSC
   ```
+* **Sync Records to the Raspberry Pi**:
+  ```bash
+  ./sync.sh
+  ```
+* **Git Workflow (Push Updates to GitHub)**:
+  ```bash
+  git add .
+  git commit -m "Describe your update"
+  git push origin main
+  ```
+
 
