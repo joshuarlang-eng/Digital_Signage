@@ -211,25 +211,23 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
   * Diagnosed that the TV was negotiating 4K @ 30 Hz (`mode: 3840x2160 @ 30.00 Hz`), causing horizontal motion judder.
   * Installed `wlr-randr` on the Pi and updated [`systemd/kiosk-browser.sh`](file:///home/jrl/Projects/Digital_Signage/systemd/kiosk-browser.sh) to lock the HDMI-A-1 output to `1920x1080 @ 60.00 Hz`.
   * The TV's internal 4K hardware upscaler automatically stretches the 1080p signal to fill the 75" panel, while animations run at a locked, buttery 60 FPS with low temperature (~50°C) and low memory bandwidth.
-* **Milestone Release**: Merged `feature/telegram-ticker` into `main` and tagged release **`v2.1`**.
+* **Milestone Releases**:
+  * **v2.1**: Live ESPN-style scrolling ticker, Web Animations API compositor rendering, and Telegram bot daemon (`@mcsc_ticker_bot`).
+  * **v2.2**: 1080p @ 60 FPS output locking via `wlr-randr` in [`systemd/kiosk-browser.sh`](file:///home/jrl/Projects/Digital_Signage/systemd/kiosk-browser.sh) for silky-smooth physical TV animations.
+  * **v2.3**: Card layout redesign: date formatted as 4-digit year inline with swimmer name (`Brooks Lang (2024)`), increased spacing gap, and enlarged swimmer typography for visibility from across the pool deck.
 
 ---
 
 ## 🔮 Next Steps & Future Ideas
 
-1. **Card Layout Redesign — Inline Year & Enlarged Swimmer Names (Next Priority)**:
-   * Currently, each record card has 3 vertical lines on the left: Event Name, Swimmer Name, Date.
-   * Redesign to display the date as just a year inline beside the swimmer's name (e.g. **Brooks Lang ('26)** or **Brooks Lang (2026)**).
-   * Eliminating the 3rd vertical line frees up massive vertical headroom inside every card.
-   * Allows scaling up the swimmer name and time font sizes significantly so they pop boldly from 25–30+ feet across the pool deck.
-2. **Web-Based Meet Upload Portal**:
+1. **Web-Based Meet Upload Portal (Next Priority)**:
    - Build a lightweight web upload page (e.g. `/admin` or dedicated route) accessible from any phone or laptop over the pool Wi-Fi / Tailscale.
    - Allows coaches to drag and drop a new Hy-Tek `.cl2` meet file directly.
    - Displays an instant in-browser preview of all broken records and time drops.
    - Includes a one-click **"Approve & Update Board"** button that executes `pipeline.py` and refreshes the live TV board automatically, completely eliminating the need for terminal commands or SSH.
    - Optional PIN or simple admin password protection.
-3. **Retired Record Styling**: For the 9-10 girls 25 back record (Brooklyn Williams), add a distinctive teal border, a "RETIRED" badge, and update `pipeline.py` to prevent overwriting.
-4. **LCM (Long Course Meters)**: Support for summer 50m long course season.
+2. **Retired Record Styling**: For the 9-10 girls 25 back record (Brooklyn Williams), add a distinctive teal border, a "RETIRED" badge, and update `pipeline.py` to prevent overwriting.
+3. **LCM (Long Course Meters)**: Support for summer 50m long course season.
 
 ---
 
