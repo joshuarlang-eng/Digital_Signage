@@ -14,6 +14,8 @@ FILES=(
     "records.sqlite"
     "SCY-Records.csv"
     "logo_transparent.png"
+    "pipeline.py"
+    "app.py"
     "static"
     "ticker_bot.py"
     "bot_config.json"
@@ -21,7 +23,7 @@ FILES=(
 
 EXISTING=()
 for f in "${FILES[@]}"; do
-    if [ -f "$f" ]; then
+    if [ -e "$f" ]; then
         EXISTING+=("$f")
     fi
 done
