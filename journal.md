@@ -253,10 +253,20 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
   * `"Bransen G Martin"` / `"Martin, Bransen G"` -> **`"Gage Martin"`**.
 * Integrated into [`pipeline.py`](file:///home/jrl/Projects/Digital_Signage/pipeline.py) and [`cl2 parser.py`](file:///home/jrl/Projects/Digital_Signage/cl2%20parser.py).
 
-### 4. Virtual Board Verification
+### 4. Virtual Board Verification & Live Pool TV Deployment
 * Verified board rendering locally in `.venv` via headless Chromium and live browser at `http://localhost:8501`.
 * Confirmed Gage Martin and Michael W Alred on the 13-14 Boys slide displaying correct typography, inline years `(2026)`, and electric neon green `NEW!` pulsing badges.
-* Staged on feature branch `feature/spooky-splash-2026-updates` prior to physical pool TV deployment.
+* Synced live records and scripts to the physical Raspberry Pi TV kiosk at the pool via Tailscale (`./sync.sh`), verifying live board update to `Oct 05, 2026`.
+
+### 5. Website Records Widget & GitHub Pages (`index.html`)
+* Built a responsive, mobile-first web records dashboard in [`index.html`](file:///home/jrl/Projects/Digital_Signage/index.html) designed to replace the 12 manual tables on `swimmcsc.com/scyrecords` (Commit Swimming).
+* Features:
+  * Fast client-side search by swimmer name, event, stroke, or date.
+  * Interactive age group pills (`6U` through `Senior`) and gender filters (`Both`, `Girls`, `Boys`).
+  * `NEW!` pulsing badges for records broken at recent meets.
+  * Light theme matching `swimmcsc.com` with a built-in Dark Mode toggle.
+  * Embedded JSON fallback enabling instant local viewing (`file:///...`) without CORS restrictions, while dynamically fetching live updates when hosted.
+* Merged into `main` for automated publishing via GitHub Pages (`https://joshuarlang-eng.github.io/Digital_Signage/`).
 
 ---
 
