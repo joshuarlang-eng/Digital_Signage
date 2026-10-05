@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCSC Swim Team Records | Marshall County Swim Club</title>
+  <meta name="description" content="Official Short Course Yards (SCY) team records for the Marshall County Swim Club (MCSC).">
+  <link rel="icon" type="image/png" href="logo_transparent.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* MCSC Official Palette */
+      --mcsc-blue: #00A3E0;
+      --mcsc-blue-dark: #0077a8;
+      --mcsc-blue-light: #e0f4fc;
+      --mcsc-green: #3abf25;
+      --mcsc-green-bg: #eafbe6;
+      --mcsc-green-glow: rgba(58, 191, 37, 0.25);
+
+      /* Light Theme (Default for website) */
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --border: #e2e8f0;
+      --border-focus: #00A3E0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08);
+
+      --pill-active-bg: #00A3E0;
+      --pill-active-text: #ffffff;
+      --badge-new-bg: #16a34a;
+      --badge-new-text: #ffffff;
+
+      --stroke-free: #0284c7;
+      --stroke-back: #0d9488;
+      --stroke-breast: #d97706;
+      --stroke-fly: #9333ea;
+      --stroke-im: #e11d48;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #090e17;
+      --bg-card: #131c2e;
+      --bg-subtle: #1a263d;
+      --border: #23334d;
+      --border-focus: #00A3E0;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-light: #64748b;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5);
+
+      --pill-active-bg: #00A3E0;
+      --pill-active-text: #ffffff;
+      --badge-new-bg: #44D62C;
+      --badge-new-text: #052e16;
+
+      --mcsc-blue-light: rgba(0, 163, 224, 0.15);
+      --mcsc-green-bg: rgba(68, 214, 44, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Header */
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .brand-title h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .brand-title .subtitle {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--mcsc-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--mcsc-blue);
+      background: var(--mcsc-blue-light);
+    }
+
+    /* Sub-header meta banner */
+    .meta-bar {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: var(--bg-subtle);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .meta-chip.highlight {
+      background: var(--mcsc-green-bg);
+      border-color: var(--mcsc-green);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .meta-chip.highlight .dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--mcsc-green);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--mcsc-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    /* Filter Controls Toolbar */
+    .controls-panel {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-page);
+      padding: 16px 0 12px;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      background-color: rgba(var(--bg-page), 0.95);
+      margin-bottom: 24px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .search-box {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 44px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 16px 0 42px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.18);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      pointer-events: none;
+    }
+
+    .clear-search-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px;
+      display: none;
+    }
+
+    .clear-search-btn:hover {
+      color: var(--text-main);
+    }
+
+    /* Filters: Age & Gender tabs */
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-group::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+      padding-right: 4px;
+      white-space: nowrap;
+    }
+
+    .filter-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--mcsc-blue);
+      color: var(--mcsc-blue-dark);
+    }
+
+    .filter-pill.active {
+      background: var(--pill-active-bg);
+      border-color: var(--pill-active-bg);
+      color: var(--pill-active-text);
+      box-shadow: 0 2px 6px rgba(0, 163, 224, 0.3);
+    }
+
+    .filter-pill.new-pill.active {
+      background: var(--badge-new-bg);
+      border-color: var(--badge-new-bg);
+      color: var(--badge-new-text);
+      box-shadow: 0 2px 6px rgba(58, 191, 37, 0.3);
+    }
+
+    .filter-divider {
+      height: 20px;
+      width: 1px;
+      background: var(--border);
+      margin: 0 4px;
+    }
+
+    /* Records Group Section */
+    .records-group {
+      background: var(--bg-card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: all 0.15s ease;
+    }
+
+    .group-header {
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .group-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .gender-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .gender-tag.girls {
+      background: rgba(236, 72, 153, 0.12);
+      color: #db2777;
+    }
+
+    .gender-tag.boys {
+      background: rgba(14, 165, 233, 0.12);
+      color: #0284c7;
+    }
+
+    .group-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .group-count {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Responsive Records Table */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table.records-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    table.records-table th {
+      background: var(--bg-card);
+      color: var(--text-light);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 10px 18px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    table.records-table td {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    table.records-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table.records-table tr:hover td {
+      background-color: var(--bg-subtle);
+    }
+
+    /* Cell styles */
+    .event-cell {
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .stroke-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .stroke-free { background-color: var(--stroke-free); }
+    .stroke-back { background-color: var(--stroke-back); }
+    .stroke-breast { background-color: var(--stroke-breast); }
+    .stroke-fly { background-color: var(--stroke-fly); }
+    .stroke-im { background-color: var(--stroke-im); }
+
+    .time-cell {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--mcsc-blue-dark);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    [data-theme="dark"] .time-cell {
+      color: var(--mcsc-blue);
+    }
+
+    .time-cell.is-new {
+      color: var(--mcsc-green);
+    }
+
+    .badge-new {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      background: var(--badge-new-bg);
+      color: var(--badge-new-text);
+      padding: 2px 6px;
+      border-radius: 4px;
+      box-shadow: 0 0 8px var(--mcsc-green-glow);
+    }
+
+    .swimmer-cell {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .date-cell {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-state h3 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    /* Footer */
+    footer.page-footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    footer.page-footer a {
+      color: var(--mcsc-blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer.page-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 640px) {
+      header {
+        padding: 16px 0 14px;
+      }
+
+      .brand-logo {
+        height: 44px;
+      }
+
+      .brand-title h1 {
+        font-size: 1.1rem;
+      }
+
+      .header-actions .btn-text {
+        display: none;
+      }
+
+      table.records-table th, 
+      table.records-table td {
+        padding: 10px 12px;
+      }
+
+      .time-cell {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Print optimization */
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+        padding-bottom: 0;
+      }
+      .controls-panel, .header-actions {
+        display: none !important;
+      }
+      .records-group {
+        break-inside: avoid;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        margin-bottom: 20px;
+      }
+      .group-header {
+        background: #eee;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand-wrap">
+          <img src="logo_transparent.png" alt="MCSC Logo" class="brand-logo" onerror="this.style.display='none'">
+          <div class="brand-title">
+            <span class="subtitle">Marshall County Swim Club</span>
+            <h1>Short Course Yards Records</h1>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+            <span id="themeIcon">🌙</span>
+            <span class="btn-text" id="themeText">Dark Mode</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="meta-bar">
+        <div class="meta-chip">
+          <span id="totalRecordsBadge">194 Active Records</span>
+        </div>
+        <div class="meta-chip highlight" id="newRecordsBanner" style="display: none;">
+          <span class="dot"></span>
+          <span id="newRecordsCount">19 Records Broken at Recent Meet</span>
+        </div>
+        <div class="meta-chip">
+          <span>Last Meet: <strong id="lastMeetName">Loading...</strong></span>
+        </div>
+        <div class="meta-chip">
+          <span>Updated: <span id="lastUpdatedDate">--</span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Controls Toolbar -->
+  <div class="controls-panel">
+    <div class="container">
+      <!-- Search Input -->
+      <div class="search-row">
+        <div class="search-box">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Search by swimmer (e.g. Gage Martin), event (e.g. 50 Free), stroke..." autocomplete="off">
+          <button class="clear-search-btn" id="clearSearchBtn" aria-label="Clear search">✕</button>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-group">
+        <span class="filter-label">Age:</span>
+        <button class="filter-pill active" data-age="all">All Ages</button>
+        <button class="filter-pill" data-age="6U">6 &amp; Under</button>
+        <button class="filter-pill" data-age="8U">8 &amp; Under</button>
+        <button class="filter-pill" data-age="9-10">9–10</button>
+        <button class="filter-pill" data-age="11-12">11–12</button>
+        <button class="filter-pill" data-age="13-14">13–14</button>
+        <button class="filter-pill" data-age="Senior">Senior (15+)</button>
+
+        <div class="filter-divider"></div>
+
+        <span class="filter-label">Gender:</span>
+        <button class="filter-pill active" data-gender="all">Both</button>
+        <button class="filter-pill" data-gender="F">Girls</button>
+        <button class="filter-pill" data-gender="M">Boys</button>
+
+        <div class="filter-divider"></div>
+
+        <button class="filter-pill new-pill" id="newFilterBtn" data-new="false">
+          ✨ New Records Only
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container">
+    <div id="recordsContainer">
+      <div class="empty-state">
+        <h3>Loading team records...</h3>
+        <p>Fetching the latest data from Marshall County Swim Club.</p>
+      </div>
+    </div>
+
+    <!-- Page Footer -->
+    <footer class="page-footer">
+      <p>© Marshall County Swim Club • <a href="https://www.swimmcsc.com" target="_blank" rel="noopener">www.swimmcsc.com</a> • Home of the Fly</p>
+    </footer>
+  </main>
+
+  <!-- Application Logic -->
+  <script>
+    let rawData = null;
+    let selectedAge = 'all';
+    let selectedGender = 'all';
+    let filterNewOnly = false;
+    let searchQuery = '';
+
+    // Color code strokes
+    function getStrokeClass(eventStr) {
+      if (eventStr.includes('Free')) return 'stroke-free';
+      if (eventStr.includes('Back')) return 'stroke-back';
+      if (eventStr.includes('Breast')) return 'stroke-breast';
+      if (eventStr.includes('Fly')) return 'stroke-fly';
+      if (eventStr.includes('IM')) return 'stroke-im';
+      return 'stroke-free';
+    }
+
+    // Format date string
+    function formatDate(dateStr) {
+      if (!dateStr) return '--';
+      const parts = dateStr.split('-');
+      if (parts.length === 3) {
+        return `${parts[1]}/${parts[2]}/${parts[0]}`;
+      }
+      return dateStr;
+    }
+
+    // Theme Management
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('mcsc_theme', theme);
+      if (theme === 'dark') {
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light Mode';
+      } else {
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark Mode';
+      }
+    }
+
+    const savedTheme = localStorage.getItem('mcsc_theme') || 'light';
+    setTheme(savedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Render Records
+    function render() {
+      const container = document.getElementById('recordsContainer');
+      if (!rawData || !rawData.groups) {
+        container.innerHTML = '<div class="empty-state"><h3>No records found.</h3></div>';
+        return;
+      }
+
+      let totalMatchingRecords = 0;
+      let html = '';
+
+      rawData.groups.forEach(group => {
+        // Filter by age
+        if (selectedAge !== 'all' && group.agegroup !== selectedAge) return;
+
+        // Filter by gender
+        if (selectedGender !== 'all' && group.gender !== selectedGender) return;
+
+        // Filter records within group
+        const matchingRecords = group.records.filter(r => {
+          if (filterNewOnly && !r.is_new) return false;
+
+          if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            const matchesName = r.name.toLowerCase().includes(q);
+            const matchesEvent = r.event.toLowerCase().includes(q);
+            const matchesTime = r.time_formatted.toLowerCase().includes(q);
+            const matchesDate = (r.date || '').toLowerCase().includes(q);
+            if (!matchesName && !matchesEvent && !matchesTime && !matchesDate) return false;
+          }
+          return true;
+        });
+
+        if (matchingRecords.length === 0) return;
+
+        totalMatchingRecords += matchingRecords.length;
+
+        const isGirls = group.gender === 'F';
+        const genderClass = isGirls ? 'girls' : 'boys';
+        const genderLabel = isGirls ? 'Girls' : 'Boys';
+
+        html += `
+          <div class="records-group">
+            <div class="group-header">
+              <div class="group-title-wrap">
+                <span class="gender-tag ${genderClass}">${genderLabel}</span>
+                <h2 class="group-title">${group.title}</h2>
+              </div>
+              <span class="group-count">${matchingRecords.length} ${matchingRecords.length === 1 ? 'event' : 'events'}</span>
+            </div>
+            <div class="table-container">
+              <table class="records-table">
+                <thead>
+                  <tr>
+                    <th>Event</th>
+                    <th>Record Time</th>
+                    <th>Record Holder</th>
+                    <th>Date Set</th>
+                  </tr>
+                </thead>
+                <tbody>
+        `;
+
+        matchingRecords.forEach(r => {
+          const strokeClass = getStrokeClass(r.event);
+          const newBadge = r.is_new ? '<span class="badge-new">NEW!</span>' : '';
+          const timeClass = r.is_new ? 'time-cell is-new' : 'time-cell';
+
+          html += `
+            <tr>
+              <td>
+                <div class="event-cell">
+                  <span class="stroke-dot ${strokeClass}"></span>
+                  ${r.event}
+                </div>
+              </td>
+              <td>
+                <div class="${timeClass}">
+                  ${r.time_formatted}
+                  ${newBadge}
+                </div>
+              </td>
+              <td class="swimmer-cell">${r.name}</td>
+              <td class="date-cell">${formatDate(r.date)}</td>
+            </tr>
+          `;
+        });
+
+        html += `
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      });
+
+      if (totalMatchingRecords === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3>No matching records found</h3>
+            <p>Try clearing your search query or selecting a different age group.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = html;
+      }
+
+      // Notify parent iframe (if embedded on swimmcsc.com)
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'mcsc-records-resize',
+          height: document.body.scrollHeight
+        }, '*');
+      }
+    }
+
+    // Filter listeners
+    document.querySelectorAll('.filter-pill[data-age]').forEach(pill => {
+      pill.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-pill[data-age]').forEach(p => p.classList.remove('active'));
+        e.target.classList.add('active');
+        selectedAge = e.target.getAttribute('data-age');
+        render();
+      });
+    });
+
+    document.querySelectorAll('.filter-pill[data-gender]').forEach(pill => {
+      pill.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-pill[data-gender]').forEach(p => p.classList.remove('active'));
+        e.target.classList.add('active');
+        selectedGender = e.target.getAttribute('data-gender');
+        render();
+      });
+    });
+
+    const newFilterBtn = document.getElementById('newFilterBtn');
+    newFilterBtn.addEventListener('click', () => {
+      filterNewOnly = !filterNewOnly;
+      newFilterBtn.classList.toggle('active', filterNewOnly);
+      render();
+    });
+
+    // Search input
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      clearSearchBtn.style.display = searchQuery ? 'block' : 'none';
+      render();
+    });
+
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      clearSearchBtn.style.display = 'none';
+      searchInput.focus();
+      render();
+    });
+
+    // Fetch records data
+    async function loadData() {
+      try {
+        const response = await fetch('./records.json?v=' + Date.now());
+        if (!response.ok) throw new Error('Network response was not ok');
+        rawData = await response.json();
+
+        // Update meta bar
+        document.getElementById('totalRecordsBadge').textContent = `${rawData.total_records || 194} Active Records`;
+        document.getElementById('lastMeetName').textContent = rawData.meet_processed || 'Spooky Splash 2026';
+
+        if (rawData.last_updated) {
+          const d = new Date(rawData.last_updated);
+          document.getElementById('lastUpdatedDate').textContent = d.toLocaleDateString('en-US', {
+            month: 'short', day: 'numeric', year: 'numeric'
+          });
+        }
+
+        // Count new records
+        let newCount = 0;
+        if (rawData.records) {
+          newCount = rawData.records.filter(r => r.is_new).length;
+        }
+
+        if (newCount > 0) {
+          document.getElementById('newRecordsBanner').style.display = 'inline-flex';
+          document.getElementById('newRecordsCount').textContent = `${newCount} Records Broken at Recent Meet`;
+          document.getElementById('newFilterBtn').textContent = `✨ New Records (${newCount})`;
+        } else {
+          document.getElementById('newRecordsBanner').style.display = 'none';
+          document.getElementById('newFilterBtn').style.display = 'none';
+        }
+
+        render();
+      } catch (err) {
+        console.error('Failed to load records.json:', err);
+        document.getElementById('recordsContainer').innerHTML = `
+          <div class="empty-state">
+            <h3>Unable to load records</h3>
+            <p>Could not fetch records.json. Please check your connection and reload.</p>
+          </div>
+        `;
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
