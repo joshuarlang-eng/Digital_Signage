@@ -230,6 +230,36 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
 
 ---
 
+## 🏊 Update: October 5, 2026 — 2026 Spooky Splash Meet Ingestion, Mixed-Event Gender Fix & Gage Martin Alias
+
+### 1. 2026 SES WAKE-CTA Spooky Splash Meet Ingestion
+* Ingested meet results file [`Meet Results-2026 SES WAKE-CTA Spooky Splash-03Oct2026-001.cl2`](file:///home/jrl/Projects/Digital_Signage/Meet%20Results-2026%20SES%20WAKE-CTA%20Spooky%20Splash-03Oct2026-001.cl2) (held October 3–4, 2026).
+* Extracted **129 valid swims** across **24 MCSC swimmers**.
+* Detected and verified **19 new or newly established team records**:
+  * **8U Girls**: Finley T Lewis broke 7 records (50 Free @ 35.17, 100 Free @ 1:21.80, 50 Back @ 42.55, 100 Back @ 1:32.97, 100 Breast @ 1:59.84, 100 Fly @ 1:46.90, 100 IM @ 1:35.68).
+  * **9-10 Girls**: Peri L Davis (100 Breast @ 1:43.87, 200 Back @ 2:58.10), Yhana B Maxilom (200 IM @ 3:12.72).
+  * **11-12 Girls**: Tessa T Cook (200 Back @ 2:44.42).
+  * **11-12 Boys**: Jace C Duncan (50 Fly @ 28.09, 100 Fly @ 1:03.96, 100 Back @ 1:05.56).
+  * **13-14 Boys**: Gage Martin (50 Back @ 27.42, 50 Fly @ 27.66, 100 IM @ 1:01.48), Michael W Alred (100 Fly @ 58.69, 400 IM @ 4:43.89).
+
+### 2. CL2 Mixed/Open Event Gender Fix (Column 66 vs 67)
+* **Root Cause**: The 2026 meet operated with open/mixed events, putting `'X'` in Column 67 (0-indexed 66).
+  * Hy-Tek CL2 `D0` specification defines Column 66 (0-indexed 65) as the **swimmer's biological/competition gender** (`'M'` or `'F'`), and Column 67 (0-indexed 66) as the **event gender category** (`'M'`, `'F'`, or `'X'`).
+  * The legacy parser previously read index 66, which returned `'X'` and caused all swims from mixed-event meets to be skipped.
+* **Fix Applied**: Updated both [`pipeline.py`](file:///home/jrl/Projects/Digital_Signage/pipeline.py) and [`cl2 parser.py`](file:///home/jrl/Projects/Digital_Signage/cl2%20parser.py) to read swimmer gender from index 65 first, with fallback to index 66.
+
+### 3. Preferred Swimmer Name Aliases (`Gage Martin`)
+* Added `SWIMMER_NAME_ALIASES` mapping to cleanly support swimmers who compete under their legal first name but go by their middle name or nickname on the record board:
+  * `"Bransen G Martin"` / `"Martin, Bransen G"` -> **`"Gage Martin"`**.
+* Integrated into [`pipeline.py`](file:///home/jrl/Projects/Digital_Signage/pipeline.py) and [`cl2 parser.py`](file:///home/jrl/Projects/Digital_Signage/cl2%20parser.py).
+
+### 4. Virtual Board Verification
+* Verified board rendering locally in `.venv` via headless Chromium and live browser at `http://localhost:8501`.
+* Confirmed Gage Martin and Michael W Alred on the 13-14 Boys slide displaying correct typography, inline years `(2026)`, and electric neon green `NEW!` pulsing badges.
+* Staged on feature branch `feature/spooky-splash-2026-updates` prior to physical pool TV deployment.
+
+---
+
 ## 🔮 Next Steps & Future Ideas
 
 1. **Web-Based Meet Upload Portal (Next Priority)**:

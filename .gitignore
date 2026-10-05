@@ -20,6 +20,8 @@ __pycache__/
 # Local testing scratch
 scratch/
 tmp/
+csv files/
+cl2 files/
 
 # Secrets & Bot Config
 bot_config.json

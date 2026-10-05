@@ -132,19 +132,35 @@ def event_sort_key(event_name: str) -> Tuple[int, int]:
     return (STROKE_ORDER.get(stroke, 99), dist)
 
 
+# Preferred swimmer name overrides (for swimmers who go by middle names or nicknames)
+SWIMMER_NAME_ALIASES = {
+    'Bransen G Martin': 'Gage Martin',
+    'Bransen Martin': 'Gage Martin',
+    'Martin, Bransen G': 'Gage Martin',
+    'Martin, Bransen': 'Gage Martin',
+}
+
+
 def clean_swimmer_name(raw_name: str) -> str:
     """
-    Converts 'Last, First' into 'First Last' while stripping suffixes like ', Jr'.
+    Converts 'Last, First' into 'First Last' while stripping suffixes like ', Jr',
+    and applying preferred swimmer name aliases.
     """
     cleaned = raw_name.strip()
+    if cleaned in SWIMMER_NAME_ALIASES:
+        return SWIMMER_NAME_ALIASES[cleaned]
+
     for suffix in [', Jr.', ', Jr', ', III', ', II', ', IV']:
         if cleaned.endswith(suffix):
             cleaned = cleaned[:-len(suffix)].strip()
     
     if ', ' in cleaned:
         parts = cleaned.split(', ', 1)
-        return f"{parts[1].strip()} {parts[0].strip()}"
-    return cleaned
+        formatted = f"{parts[1].strip()} {parts[0].strip()}"
+    else:
+        formatted = cleaned
+
+    return SWIMMER_NAME_ALIASES.get(formatted, formatted)
 
 
 def parse_cl2_meet(file_path: str, team_code: str = 'MCSC') -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
@@ -206,7 +222,11 @@ def parse_cl2_meet(file_path: str, team_code: str = 'MCSC') -> Tuple[Dict[str, A
             except ValueError:
                 continue
 
-            gender = line[66].strip().upper()
+            # Swimmer gender is at index 65 (col 66); event gender is at index 66 (col 67)
+            # which can be 'X' in mixed/open-format meets.
+            gender = line[65].strip().upper()
+            if gender not in ('M', 'F'):
+                gender = line[66].strip().upper()
             if gender not in ('M', 'F'):
                 continue
 

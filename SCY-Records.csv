@@ -17,18 +17,19 @@ Agegroup,Gender,Event,Time,Name,Date
 6U,M,50 Fly,53.94,Max Alred,2023-11-04
 6U,M,100 IM,108.82,Max Alred,2023-10-14
 8U,F,25 Free,16.19,Tessa Kate Watkins,2023-01-07
-8U,F,50 Free,38.46,Finley Lewis,2026-02-06
-8U,F,100 Free,88.93,Finley Lewis,2026-02-06
+8U,F,50 Free,35.17,Finley T Lewis,2026-10-03
+8U,F,100 Free,81.8,Finley T Lewis,2026-10-03
 8U,F,200 Free,195.89,Finley Lewis,2026-01-30
 8U,F,25 Back,19.97,Tessa Kate Watkins,2022-11-13
-8U,F,50 Back,43.17,Tessa Kate Watkins,2023-01-28
-8U,F,100 Back,102.62,Finley Lewis,2025-12-05
+8U,F,50 Back,42.55,Finley T Lewis,2026-10-03
+8U,F,100 Back,92.97,Finley T Lewis,2026-10-03
 8U,F,25 Breast,22.29,Kendall Overby,2025-12-13
 8U,F,50 Breast,49.71,Reagan Conley,2018-11-09
+8U,F,100 Breast,119.84,Finley T Lewis,2026-10-03
 8U,F,25 Fly,18.25,Tessa Kate Watkins,2023-01-28
 8U,F,50 Fly,46.11,Finley Lewis,2025-11-07
-8U,F,100 Fly,126.13,Finley Lewis,2025-12-05
-8U,F,100 IM,98.41,Finley Lewis,2026-02-06
+8U,F,100 Fly,106.9,Finley T Lewis,2026-10-03
+8U,F,100 IM,95.68,Finley T Lewis,2026-10-03
 8U,F,200 IM,226.81,Finley Lewis,2025-11-07
 8U,M,25 Free,15.96,John Dollar,2025-12-13
 8U,M,50 Free,35.36,Maxwell Alred,2025-11-07
@@ -53,14 +54,15 @@ Agegroup,Gender,Event,Time,Name,Date
 9-10,F,25 Back,17.03,Brooklyn Williams,2019-01-25
 9-10,F,50 Back,35.81,Tessa Watkins,2025-02-21
 9-10,F,100 Back,81.51,Tessa K Watkins,2025-01-17
+9-10,F,200 Back,178.1,Peri L Davis,2026-10-03
 9-10,F,25 Breast,23.42,Karli Gray,2019-01-25
 9-10,F,50 Breast,42.53,Alexus Ashley,2016-10-10
-9-10,F,100 Breast,107.26,Jacy Gregg,2022-07-30
+9-10,F,100 Breast,103.87,Peri L Davis,2026-10-03
 9-10,F,25 Fly,17.11,Layla Jung,2019-01-25
 9-10,F,50 Fly,33.77,Alexus Ashley,2016-10-10
 9-10,F,100 Fly,83.16,KG Willoughby,2018-02-23
 9-10,F,100 IM,80.86,Alexus Ashley,2016-10-10
-9-10,F,200 IM,198.59,Yhana Maxilom,2026-02-06
+9-10,F,200 IM,192.72,Yhana B Maxilom,2026-10-03
 9-10,M,25 Free,15.31,Jace Duncan,2024-09-28
 9-10,M,50 Free,30.53,Jace Duncan,2025-02-21
 9-10,M,100 Free,68.83,Jace Duncan,2025-02-21
@@ -74,7 +76,7 @@ Agegroup,Gender,Event,Time,Name,Date
 9-10,M,100 Breast,90.67,Matthew W Alred,2024-12-06
 9-10,M,25 Fly,17.07,Colt Yates,2021-10-22
 9-10,M,50 Fly,33.35,Jace Duncan,2025-02-07
-9-10,M,100 Fly,80.38,Nate Lewis,2026-02-27
+9-10,M,100 Fly,81.75,Jace Duncan,2025-04-26
 9-10,M,100 IM,79.8,Matthew W Alred,2024-12-06
 9-10,M,200 IM,169.73,Matthew W Alred,2024-11-08
 11-12,F,25 Free,13.89,Kara Yates,2022-10-15
@@ -86,7 +88,7 @@ Agegroup,Gender,Event,Time,Name,Date
 11-12,F,25 Back,20.92,Scout Casey,2025-09-20
 11-12,F,50 Back,34.11,Tessa Cook,2026-02-06
 11-12,F,100 Back,75.76,Tessa Cook,2025-12-05
-11-12,F,200 Back,171.91,Tessa Cook,2025-10-17
+11-12,F,200 Back,164.42,Tessa T Cook,2026-10-03
 11-12,F,25 Breast,19.35,Scout Casey,2025-09-20
 11-12,F,50 Breast,40.28,Kara Yates,2022-10-15
 11-12,F,100 Breast,92.51,Coraline A Lang,2024-12-06
@@ -104,14 +106,14 @@ Agegroup,Gender,Event,Time,Name,Date
 11-12,M,1000 Free,772.79,Matthew W Alred,2025-11-07
 11-12,M,1650 Free,1385.99,Matthew W Alred,2025-01-17
 11-12,M,50 Back,30.0,Gage Martin,2025-02-07
-11-12,M,100 Back,66.23,Gage Martin,2025-01-17
+11-12,M,100 Back,65.56,Jace C Duncan,2026-10-03
 11-12,M,200 Back,171.39,Will Weathers,2021-10-22
 11-12,M,50 Breast,33.29,Jacob P Franklin,2025-02-07
 11-12,M,100 Breast,75.85,Brody Franklin,2023-02-05
 11-12,M,200 Breast,180.62,Matthew W Alred,2025-10-17
 11-12,M,25 Fly,14.14,Jace Duncan,2025-10-17
-11-12,M,50 Fly,30.32,Jace Duncan,2026-02-27
-11-12,M,100 Fly,69.62,Michael W Alred,2024-12-06
+11-12,M,50 Fly,28.09,Jace C Duncan,2026-10-03
+11-12,M,100 Fly,63.96,Jace C Duncan,2026-10-03
 11-12,M,100 IM,67.27,Jacob P Franklin,2025-02-07
 11-12,M,200 IM,151.4,Michael W Alred,2024-12-06
 11-12,M,400 IM,317.54,Michael W Alred,2024-11-08
@@ -140,23 +142,23 @@ Agegroup,Gender,Event,Time,Name,Date
 13-14,M,200 Free,117.09,Brody K Franklin,2025-02-07
 13-14,M,500 Free,336.29,Brody K Franklin,2025-02-07
 13-14,M,1000 Free,694.9,Michael W Alred,2026-01-30
-13-14,M,1650 Free,1171.97,Michael Alred,2026-02-27
+13-14,M,1650 Free,1255.17,Andrew Watts,2024-02-02
 13-14,M,25 Back,14.37,Brody Franklin,2023-11-04
-13-14,M,50 Back,27.82,Hayden Williams,2023-02-24
+13-14,M,50 Back,27.42,Gage Martin,2026-10-03
 13-14,M,100 Back,60.28,Hayden Williams,2023-02-24
 13-14,M,200 Back,132.61,Hayden Williams,2023-02-24
 13-14,M,50 Breast,31.79,Jacob P Franklin,2026-02-06
 13-14,M,100 Breast,63.53,Brody K Franklin,2025-02-07
 13-14,M,200 Breast,154.44,Jacob P Franklin,2026-02-06
-13-14,M,50 Fly,27.97,Parker Rhodes,2026-02-27
-13-14,M,100 Fly,61.85,Brody K Franklin,2024-12-06
-13-14,M,200 Fly,133.57,Michael Alred,2026-02-27
-13-14,M,100 IM,64.73,Hayden Williams,2022-12-03
+13-14,M,50 Fly,27.66,Gage Martin,2026-10-03
+13-14,M,100 Fly,58.69,Michael W Alred,2026-10-03
+13-14,M,200 Fly,140.37,Michael W Alred,2025-12-05
+13-14,M,100 IM,61.48,Gage Martin,2026-10-03
 13-14,M,200 IM,137.96,Michael W Alred,2026-02-06
-13-14,M,400 IM,290.42,Michael Alred,2026-02-27
+13-14,M,400 IM,283.89,Michael W Alred,2026-10-03
 Senior,F,25 Free,12.51,Liza Kate Edwards,2022-07-29
 Senior,F,50 Free,25.73,Bailee Parks,2019-01-25
-Senior,F,100 Free,58.18,Anderly Shumate,2026-02-27
+Senior,F,100 Free,58.27,Mkayla Still,2019-01-25
 Senior,F,200 Free,134.03,Bailee Parks,2023-01-28
 Senior,F,500 Free,370.38,Liza Kate Edwards,2023-02-04
 Senior,F,1000 Free,793.17,Aubrey Lang,2025-11-07
@@ -165,7 +167,7 @@ Senior,F,50 Back,32.7,Anderly Shumate,2026-02-06
 Senior,F,100 Back,67.19,Aubrey Lang,2025-10-17
 Senior,F,200 Back,154.33,Aubrey Lang,2025-12-05
 Senior,F,25 Breast,16.4,Anderly Shumate,2023-11-04
-Senior,F,50 Breast,32.87,Anderly Shumate,2026-02-27
+Senior,F,50 Breast,33.0,Anderly Shumate,2026-02-06
 Senior,F,100 Breast,72.95,Anderly Shumate,2026-02-06
 Senior,F,200 Breast,165.77,Liza Kate Edwards,2022-11-13
 Senior,F,25 Fly,15.71,Anderly Shumate,2023-11-04

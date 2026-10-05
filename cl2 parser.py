@@ -98,10 +98,12 @@ def parse_file(file):
         for line in lines_1[start:end]:
             if line[:2]=='D0':
                 swimmer_name = line[11:39].strip()
-                swimmer_name = swimmer_name.replace(', Jr','')
-                swimmer_last, swimmer_first = swimmer_name.split(', ')
+                if swimmer_name in ('Martin, Bransen G', 'Martin, Bransen'):
+                    swimmer_last, swimmer_first = 'Martin', 'Gage'
+                else:
+                    swimmer_last, swimmer_first = swimmer_name.split(', ')
                 swimmer_age = line[63:65].strip()
-                swimmer_gender = line[66]
+                swimmer_gender = line[65] if line[65] in ('M', 'F') else line[66]
                 event_dist = line[67:71].strip()
                 event_stroke = event_table[int(line[71])]
                 entry_time = line[88:96].strip()
