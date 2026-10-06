@@ -642,14 +642,99 @@ def sync_to_pi(target: str, files: List[str]) -> bool:
 
     cmd = ["rsync", "-avz", "--progress"] + existing_files + [target]
     try:
-        res = subprocess.run(cmd, check=True)
+        subprocess.run(cmd, check=True)
         print("[✓] Successfully synced records to Raspberry Pi!")
+
+        # Trigger service restart on target host to refresh the TV kiosk display
+        target_host = target.split(":")[0] if ":" in target else None
+        if target_host:
+            print(f"[*] Refreshing live TV display on {target_host}...")
+            subprocess.run(
+                ["ssh", "-o", "ConnectTimeout=10", target_host, "sudo systemctl restart swim-records-web swim-records-kiosk"],
+                check=False
+            )
+            print("[✓] Live TV display refreshed!")
         return True
     except subprocess.CalledProcessError as e:
         print(f"[!] rsync failed with return code {e.returncode}. Ensure SSH key access is configured.", file=sys.stderr)
         return False
     except FileNotFoundError:
         print("[!] 'rsync' command not found. Please install rsync (e.g. sudo apt install rsync).", file=sys.stderr)
+        return False
+
+
+def update_index_html_embedded_records(index_html_path: str, json_data: Dict[str, Any]) -> bool:
+    """
+    Updates the fallback embedded JSON block inside index.html so that local file:// viewing
+    also reflects the latest meet data.
+    """
+    if not os.path.exists(index_html_path):
+        return False
+    try:
+        with open(index_html_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        start_tag = '<script id="embeddedRecords" type="application/json">'
+        end_tag = '</script>'
+        start_idx = content.find(start_tag)
+        if start_idx == -1:
+            return False
+
+        end_idx = content.find(end_tag, start_idx + len(start_tag))
+        if end_idx == -1:
+            return False
+
+        pretty_json = "\n" + json.dumps(json_data, indent=2) + "\n"
+        new_content = content[:start_idx + len(start_tag)] + pretty_json + content[end_idx:]
+
+        with open(index_html_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print(f"[✓] Synced embedded records inside: {index_html_path}")
+        return True
+    except Exception as e:
+        print(f"[!] Note: Could not update embedded records in {index_html_path}: {e}")
+        return False
+
+
+def push_to_github(meet_name: Optional[str] = None, files_to_stage: Optional[List[str]] = None) -> bool:
+    """
+    Commits and pushes updated records files to GitHub so that GitHub Pages
+    deploys the latest data to the live website (www.swimmcsc.com/scyrecords).
+    """
+    import subprocess
+    print("\n[*] Pushing updated records to GitHub Pages...")
+    if files_to_stage is None:
+        files_to_stage = ["records.json", "records.sqlite", "SCY-Records.csv", "index.html"]
+
+    # Check if inside git repo
+    res = subprocess.run(["git", "rev-parse", "--is-inside-work-tree"], capture_output=True, text=True)
+    if res.returncode != 0:
+        print("[!] Not in a git repository. Skipping git push.")
+        return False
+
+    existing_files = [f for f in files_to_stage if os.path.exists(f)]
+    if not existing_files:
+        print("[!] No files found to stage for git push.")
+        return False
+
+    try:
+        subprocess.run(["git", "add"] + existing_files, check=True)
+        # Check if anything changed
+        diff = subprocess.run(["git", "diff", "--cached", "--quiet"])
+        if diff.returncode == 0:
+            print("[i] No git changes detected. GitHub Pages is already up to date.")
+            return True
+
+        commit_title = f"data: update team records from {meet_name}" if meet_name else "data: update team records"
+        subprocess.run(["git", "commit", "-m", commit_title], check=True)
+        subprocess.run(["git", "push", "origin", "main"], check=True)
+        print("[✓] Pushed to GitHub! Website (swimmcsc.com/scyrecords) will update in ~25 seconds.")
+        return True
+    except subprocess.CalledProcessError as e:
+        print(f"[!] Git push failed with return code {e.returncode}. (Check network or GitHub credentials)", file=sys.stderr)
+        return False
+    except Exception as e:
+        print(f"[!] Error during git push: {e}", file=sys.stderr)
         return False
 
 
@@ -660,14 +745,18 @@ def run_pipeline(
     output_json: str = 'records.json',
     output_sqlite: str = 'records.sqlite',
     output_csv: str = 'SCY-Records.csv',
-    pi_target: Optional[str] = None
+    index_html: str = 'index.html',
+    pi_target: Optional[str] = None,
+    push_github: bool = False
 ) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
     """
     Executes the entire data pipeline:
     1. Loads master records.
     2. If meet_path provided, parses .cl2 file, updates records in-memory.
     3. Writes records.json, SQLite database, and updated CSV.
-    4. Optionally syncs files to Raspberry Pi.
+    4. Updates embedded JSON in index.html.
+    5. Optionally syncs files to Raspberry Pi.
+    6. Optionally commits and pushes to GitHub Pages.
     """
     print("=" * 60)
     print("🏊 Swim Team Digital Signage Pipeline")
@@ -730,9 +819,19 @@ def run_pipeline(
     save_master_records_to_csv(output_csv, records)
     print(f"[✓] Exported updated master CSV to: {output_csv}")
 
-    # 6. Optional Sync to Pi
+    # 6. Update embedded records in index.html
+    update_index_html_embedded_records(index_html, json_data)
+
+    # 7. Optional Sync to Pi
     if pi_target:
         sync_to_pi(pi_target, [output_json, output_sqlite, output_csv, "logo_transparent.png"])
+
+    # 8. Optional Push to GitHub
+    if push_github:
+        push_to_github(
+            meet_name=meet_info['name'] if meet_info else None,
+            files_to_stage=[output_json, output_sqlite, output_csv, index_html]
+        )
 
     print("=" * 60)
 
@@ -747,12 +846,15 @@ if __name__ == '__main__':
     parser.add_argument('--json', help="Output JSON path", default="records.json")
     parser.add_argument('--db', help="Output SQLite DB path", default="records.sqlite")
     parser.add_argument('--csv', help="Output updated CSV path", default="SCY-Records.csv")
+    parser.add_argument('--html', help="Path to web records index.html", default="index.html")
     parser.add_argument('--init-only', action='store_true', help="Only initialize JSON and SQLite from CSV without processing a meet")
-    parser.add_argument('--sync', metavar="USER@HOST:PATH", help="Sync output files to Raspberry Pi (e.g. pi@raspberrypi.local:/home/pi/Digital-Signage)", default=None)
+    parser.add_argument('--sync', metavar="USER@HOST:PATH", help="Sync output files to Raspberry Pi (e.g. pi@swim-signage:/home/pi/Digital-Signage)", default=None)
+    parser.add_argument('--push', action=argparse.BooleanOptionalAction, default=True, help="Auto commit and push updated records to GitHub Pages (default: True)")
 
     args = parser.parse_args()
 
     meet_target = None if args.init_only else args.meet
+    should_push = args.push if not args.init_only else False
 
     try:
         run_pipeline(
@@ -762,7 +864,9 @@ if __name__ == '__main__':
             output_json=args.json,
             output_sqlite=args.db,
             output_csv=args.csv,
-            pi_target=args.sync
+            index_html=args.html,
+            pi_target=args.sync,
+            push_github=should_push
         )
     except Exception as e:
         print(f"[!] Error running pipeline: {e}", file=sys.stderr)

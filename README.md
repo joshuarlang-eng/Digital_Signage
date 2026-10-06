@@ -34,18 +34,30 @@ A localized, offline-capable digital signage solution for displaying swim team r
    - Health-check wait loop in `kiosk-browser.sh` prevents `ERR_CONNECTION_REFUSED` on boot.
    - Suppresses error dialogs, update banners, and session restore prompts.
 
+4. **Public Website Widget & GitHub Pages CI/CD (`index.html`)**:
+   - Responsive, mobile-first records dashboard embedded directly on the team website at **`https://www.swimmcsc.com/scyrecords`**.
+   - Hosted publicly via GitHub Pages (`https://joshuarlang-eng.github.io/Digital_Signage/`).
+   - Automated CI/CD pipeline via GitHub Actions (`.github/workflows/pages.yml`) deploying in ~25s upon push to `main`.
+   - Features fast client-side search, stroke filtering, age/gender pills, dynamic `NEW!` badges, and Dark Mode toggle.
+   - Dual-fetch architecture: dynamic `fetch('./records.json?v=timestamp')` for live web updates with offline fallback embedded JSON.
+
 ---
 
 ## 📁 Project Structure
 
 ```
 Digital Signage/
-├── pipeline.py                 # Unified CL2 parser & in-memory record checker
-├── app.py                      # Streamlit TV kiosk web dashboard
-├── records.json                # Pre-formatted JSON consumed by web dashboard
+├── pipeline.py                 # Unified CL2 parser, record checker & auto-sync
+├── app.py                      # Streamlit TV kiosk web dashboard (1080p/4K)
+├── index.html                  # Public website records widget (swimmcsc.com)
+├── records.json                # Pre-formatted JSON consumed by dashboards
 ├── records.sqlite              # SQLite database (records, meets, history log)
 ├── SCY-Records - 2-25-26.csv   # Initial master records CSV
 ├── SCY-Records.csv             # Updated master records CSV
+├── sync.sh                     # Dual-sync script (Raspberry Pi + GitHub Pages)
+├── .github/
+│   └── workflows/
+│       └── pages.yml           # GitHub Actions workflow for static Pages deploy
 ├── requirements.txt            # Python dependencies
 ├── systemd/
 │   ├── setup.sh                # Automated installer for Raspberry Pi OS Lite
@@ -69,13 +81,16 @@ python3 pipeline.py --init-only
 
 ### 2. Processing a New Swim Meet (`.cl2` file)
 
-To process a new meet file and update records:
+To process a new meet file, update all databases, and **automatically publish to GitHub Pages**:
 
 ```bash
 python3 pipeline.py --meet "/path/to/Meet-Results.cl2" --team MCSC
 ```
 
-To automatically sync to the Raspberry Pi over Tailscale in the same command:
+* This updates `records.json`, `records.sqlite`, `SCY-Records.csv`, and `index.html`.
+* It automatically commits and pushes data changes to GitHub (`origin main`), where GitHub Actions rebuilds and updates **`www.swimmcsc.com/scyrecords`** within ~25 seconds.
+
+To process a meet, update the website, **AND** sync directly to the Raspberry Pi TV display at the pool in a single command:
 
 ```bash
 python3 pipeline.py --meet "/path/to/Meet-Results.cl2" --team MCSC --sync pi@swim-signage:/home/pi/Digital-Signage
@@ -85,10 +100,31 @@ python3 pipeline.py --meet "/path/to/Meet-Results.cl2" --team MCSC --sync pi@swi
 - `-m, --meet`: Path to the `.cl2` file.
 - `-t, --team`: Team code (default: `MCSC`).
 - `-r, --records`: Path to master records CSV (default: `SCY-Records - 2-25-26.csv`).
+- `--push / --no-push`: Auto commit and push updated records to GitHub Pages (default: enabled).
 - `--sync`: Target for remote sync (e.g. `pi@swim-signage:/home/pi/Digital-Signage`).
 - `--json`: Output path for JSON dashboard data (default: `records.json`).
 - `--db`: Output path for SQLite database (default: `records.sqlite`).
 - `--csv`: Output path for updated master CSV (default: `SCY-Records.csv`).
+- `--html`: Output path for web records HTML (default: `index.html`).
+
+---
+
+## 🌐 Public Website Integration (`swimmcsc.com/scyrecords`)
+
+The records board is embedded on the official team website via an `<iframe>` hosted on GitHub Pages.
+
+### Live URLs
+* **Live Website**: [www.swimmcsc.com/scyrecords](https://www.swimmcsc.com/scyrecords)
+* **GitHub Pages Source**: [joshuarlang-eng.github.io/Digital_Signage/](https://joshuarlang-eng.github.io/Digital_Signage/)
+
+### Website Embed Snippet (Commit Swimming / CMS)
+In Commit Swimming's page editor, add a **Custom HTML** block with:
+
+```html
+<iframe src="https://joshuarlang-eng.github.io/Digital_Signage/" width="100%" height="900" style="border:0; width:100%; height:900px;" title="MCSC Swim Team Records"></iframe>
+```
+
+*Note: Inside the Commit Swimming admin editor (`team.commitswimming.com`), security headers block third-party iframe previews with a "Content is blocked" notice. Once published or viewed directly on the public domain (`www.swimmcsc.com`), the iframe displays cleanly without restrictions.*
 
 ---
 

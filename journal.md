@@ -258,15 +258,22 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
 * Confirmed Gage Martin and Michael W Alred on the 13-14 Boys slide displaying correct typography, inline years `(2026)`, and electric neon green `NEW!` pulsing badges.
 * Synced live records and scripts to the physical Raspberry Pi TV kiosk at the pool via Tailscale (`./sync.sh`), verifying live board update to `Oct 05, 2026`.
 
-### 5. Website Records Widget & GitHub Pages (`index.html`)
-* Built a responsive, mobile-first web records dashboard in [`index.html`](file:///home/jrl/Projects/Digital_Signage/index.html) designed to replace the 12 manual tables on `swimmcsc.com/scyrecords` (Commit Swimming).
-* Features:
-  * Fast client-side search by swimmer name, event, stroke, or date.
-  * Interactive age group pills (`6U` through `Senior`) and gender filters (`Both`, `Girls`, `Boys`).
-  * `NEW!` pulsing badges for records broken at recent meets.
-  * Light theme matching `swimmcsc.com` with a built-in Dark Mode toggle.
-  * Embedded JSON fallback enabling instant local viewing (`file:///...`) without CORS restrictions, while dynamically fetching live updates when hosted.
-* Merged into `main` for automated publishing via GitHub Pages (`https://joshuarlang-eng.github.io/Digital_Signage/`).
+### 5. Website Records Widget & GitHub Actions CI/CD (`index.html`)
+* **Built and Published**: Responsive, mobile-first web records dashboard in [`index.html`](file:///home/jrl/Projects/Digital_Signage/index.html), replacing the 12 static tables on `swimmcsc.com/scyrecords`.
+* **CI/CD Migration & Outage Resolution**:
+  * Encountered GitHub Pages dynamic runner acquisition timeout (*"The job was not acquired by Runner of type hosted even after multiple attempts"* / Correlation ID 500 internal server error).
+  * Migrated repository from legacy dynamic Pages branch builder to a dedicated GitHub Actions workflow in [`.github/workflows/pages.yml`](file:///home/jrl/Projects/Digital_Signage/.github/workflows/pages.yml) using standard `ubuntu-latest` runners.
+  * Pages deployment completes reliably in ~25 seconds on every push to `main`.
+* **Live Integration on Team Website (`swimmcsc.com/scyrecords`)**:
+  * Embedded directly into Commit Swimming CMS via a single-line responsive `<iframe>`.
+  * **Admin CSP vs Public Domain**: Diagnosed that `team.commitswimming.com` (admin editor) enforces a strict Content-Security-Policy that blocks third-party iframes in edit mode (*"This content is blocked"*), whereas the public website (`www.swimmcsc.com/scyrecords`) serves without CSP restrictions and renders perfectly.
+  * Verified live production page: 196 active records, 19 broken records badge, instant search, stroke filters, and dark mode toggle.
+* **Full Automation for Future Meets**:
+  * Updated [`pipeline.py`](file:///home/jrl/Projects/Digital_Signage/pipeline.py):
+    * Automatically updates embedded JSON in `index.html` alongside `records.json`, `records.sqlite`, and `SCY-Records.csv`.
+    * Added `--push` flag (enabled by default) to automatically commit and push to `origin main` whenever a new `.cl2` meet file is processed.
+  * Updated [`sync.sh`](file:///home/jrl/Projects/Digital_Signage/sync.sh):
+    * Dual-sync: pushes updates to the Raspberry Pi over Tailscale (triggering service restarts) **AND** pushes to GitHub Pages for immediate web updates in one command.
 
 ---
 
