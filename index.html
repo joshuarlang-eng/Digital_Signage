@@ -4748,14 +4748,30 @@
       return dateStr;
     }
 
-    // Theme Management
+    // Theme Management (with safe storage fallback for sandboxed iframes)
     const themeBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
     const themeText = document.getElementById('themeText');
 
+    function getStoredTheme() {
+      try {
+        return localStorage.getItem('mcsc_theme') || 'light';
+      } catch (e) {
+        return 'light';
+      }
+    }
+
+    function setStoredTheme(theme) {
+      try {
+        localStorage.setItem('mcsc_theme', theme);
+      } catch (e) {
+        // Silently ignore if localStorage is restricted (e.g. sandboxed iframe)
+      }
+    }
+
     function setTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('mcsc_theme', theme);
+      setStoredTheme(theme);
       if (theme === 'dark') {
         themeIcon.textContent = '☀️';
         themeText.textContent = 'Light Mode';
@@ -4765,7 +4781,7 @@
       }
     }
 
-    const savedTheme = localStorage.getItem('mcsc_theme') || 'light';
+    const savedTheme = getStoredTheme();
     setTheme(savedTheme);
 
     themeBtn.addEventListener('click', () => {
@@ -4882,10 +4898,14 @@
 
       // Notify parent iframe (if embedded on swimmcsc.com)
       if (window.parent && window.parent !== window) {
-        window.parent.postMessage({
-          type: 'mcsc-records-resize',
-          height: document.body.scrollHeight
-        }, '*');
+        try {
+          window.parent.postMessage({
+            type: 'mcsc-records-resize',
+            height: document.body.scrollHeight
+          }, '*');
+        } catch (e) {
+          // Ignore postMessage failure in restricted iframe
+        }
       }
     }
 

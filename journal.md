@@ -277,6 +277,36 @@ The Raspberry Pi kiosk periodically locked up / froze after running for several 
 
 ---
 
+## 🛠️ Update: October 7, 2026 — Resolution for iframe "Loading team records..." Hang on swimMCSC.com
+
+### ⚠️ Problem Description
+When embedded on the production team website (`swimmcsc.com/SCYRecords`) via an `<iframe>`, the records widget hung indefinitely on *"Loading team records..."*, while visiting the GitHub Pages deployment directly (`https://joshuarlang-eng.github.io/Digital_Signage/`) worked flawlessly.
+
+### 🔬 Root Cause Analysis
+1. **CMS Sandboxed Iframe Restrictions**:
+   - The team website CMS (Commit Swimming) embeds custom HTML inside a nested iframe with:
+     `sandbox="allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-top-navigation-by-user-activation"`
+   - Notably, **`allow-same-origin` is omitted** by the CMS sandbox policy.
+2. **Fatal Synchronous `SecurityError` on `localStorage`**:
+   - Under HTML5 specifications, when an iframe lacks `allow-same-origin`, its origin is treated as opaque (`origin: null`).
+   - At line 4768 in [`index.html`](file:///home/jrl/Projects/Digital_Signage/index.html), the script executed:
+     `const savedTheme = localStorage.getItem('mcsc_theme') || 'light';`
+   - In a sandboxed iframe without `allow-same-origin`, browsers strictly forbid access to Web Storage (`localStorage` and `sessionStorage`), throwing an uncaught:
+     `DOMException: SecurityError: Failed to read the 'localStorage' property from 'Window': The document is sandboxed and lacks the 'allow-same-origin' flag.`
+   - Because this error was synchronous and unhandled at top-level script evaluation, the JavaScript runtime halted immediately before `loadData()` could ever be called.
+   - The page DOM was left permanently stuck in the initial fallback `<div class="empty-state"><h3>Loading team records...</h3></div>`.
+
+### ✅ Solutions Implemented & Verified
+1. **Defensive Web Storage Wrappers**:
+   - Implemented `getStoredTheme()` and `setStoredTheme()` guarded by `try...catch` blocks. If `localStorage` access is blocked by an iframe sandbox or third-party storage partitioning, the application gracefully defaults to `'light'` mode without throwing.
+2. **Defensive PostMessage Wrapper**:
+   - Wrapped the parent iframe auto-resize `window.parent.postMessage(...)` in a `try...catch` block to protect against any cross-origin messaging restrictions.
+3. **End-to-End Headless Verification**:
+   - Tested under Chromium headless simulating the exact sandboxed iframe attributes used by `swimmcsc.com`.
+   - Confirmed 0 exceptions thrown, all 196 records cleanly rendered, and interactive filtering and theme toggling working seamlessly.
+
+---
+
 ## 🔮 Next Steps & Future Ideas
 
 1. **Web-Based Meet Upload Portal (Next Priority)**:
