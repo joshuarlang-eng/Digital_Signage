@@ -740,7 +740,7 @@ def push_to_github(meet_name: Optional[str] = None, files_to_stage: Optional[Lis
 
 def run_pipeline(
     meet_path: Optional[str] = None,
-    master_csv: str = 'SCY-Records - 2-25-26.csv',
+    master_csv: str = 'SCY-Records.csv',
     team_code: str = 'MCSC',
     output_json: str = 'records.json',
     output_sqlite: str = 'records.sqlite',
@@ -842,7 +842,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Swim Team Records Pipeline")
     parser.add_argument('-m', '--meet', help="Path to .cl2 meet results file", default=None)
     parser.add_argument('-t', '--team', help="Team code (default: MCSC)", default="MCSC")
-    parser.add_argument('-r', '--records', help="Path to current master records CSV", default="SCY-Records - 2-25-26.csv")
+    parser.add_argument('-r', '--records', help="Path to current master records CSV", default="SCY-Records.csv")
     parser.add_argument('--json', help="Output JSON path", default="records.json")
     parser.add_argument('--db', help="Output SQLite DB path", default="records.sqlite")
     parser.add_argument('--csv', help="Output updated CSV path", default="SCY-Records.csv")

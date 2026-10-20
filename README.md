@@ -99,7 +99,7 @@ python3 pipeline.py --meet "/path/to/Meet-Results.cl2" --team MCSC --sync pi@swi
 **Options**:
 - `-m, --meet`: Path to the `.cl2` file.
 - `-t, --team`: Team code (default: `MCSC`).
-- `-r, --records`: Path to master records CSV (default: `SCY-Records - 2-25-26.csv`).
+- `-r, --records`: Path to master records CSV (default: `SCY-Records.csv`).
 - `--push / --no-push`: Auto commit and push updated records to GitHub Pages (default: enabled).
 - `--sync`: Target for remote sync (e.g. `pi@swim-signage:/home/pi/Digital-Signage`).
 - `--json`: Output path for JSON dashboard data (default: `records.json`).
