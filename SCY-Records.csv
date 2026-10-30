@@ -70,12 +70,14 @@ Agegroup,Gender,Event,Time,Name,Date
 9-10,M,100 Free,68.83,Jace Duncan,2025-02-21
 9-10,M,200 Free,148.69,Jace Duncan,2025-02-21
 9-10,M,500 Free,412.89,Matthew W Alred,2024-11-08
+9-10,M,1650 Free,1535.55,Maxwell Alred,2026-10-29
 9-10,M,25 Back,25.63,Jacob Franklin,2021-10-22
 9-10,M,50 Back,36.09,Jace Duncan,2025-02-21
 9-10,M,100 Back,77.24,Jace Duncan,2025-02-07
 9-10,M,25 Breast,21.93,Nathaniel Lewis,2025-09-20
 9-10,M,50 Breast,42.28,Matthew W Alred,2024-12-06
 9-10,M,100 Breast,90.67,Matthew W Alred,2024-12-06
+9-10,M,200 Breast,236.76,William Giddens,2026-10-29
 9-10,M,25 Fly,17.07,Colt Yates,2021-10-22
 9-10,M,50 Fly,33.35,Jace Duncan,2025-02-07
 9-10,M,100 Fly,81.75,Jace Duncan,2025-04-26
@@ -87,6 +89,7 @@ Agegroup,Gender,Event,Time,Name,Date
 11-12,F,200 Free,148.5,Tessa Cook,2025-11-07
 11-12,F,500 Free,397.45,Tessa Cook,2025-12-05
 11-12,F,1000 Free,838.87,Tessa Cook,2025-11-07
+11-12,F,1650 Free,1379.44,Tessa Cook,2026-10-29
 11-12,F,25 Back,20.92,Scout Casey,2025-09-20
 11-12,F,50 Back,34.11,Tessa Cook,2026-02-06
 11-12,F,100 Back,75.76,Tessa Cook,2025-12-05
@@ -97,6 +100,7 @@ Agegroup,Gender,Event,Time,Name,Date
 11-12,F,25 Fly,19.33,Gracie Martin,2025-09-20
 11-12,F,50 Fly,32.21,Aubrey Lang,2023-01-28
 11-12,F,100 Fly,77.77,Aubrey Lang,2022-10-15
+11-12,F,200 Fly,198.02,Flora Yates,2026-10-29
 11-12,F,100 IM,75.07,Aubrey Lang,2022-10-15
 11-12,F,200 IM,165.36,Aubrey Lang,2022-07-30
 11-12,F,400 IM,361.97,Aubrey Lang,2022-07-30
@@ -106,7 +110,7 @@ Agegroup,Gender,Event,Time,Name,Date
 11-12,M,200 Free,128.77,Jacob P Franklin,2025-01-17
 11-12,M,500 Free,354.78,Jacob P Franklin,2025-02-07
 11-12,M,1000 Free,772.79,Matthew W Alred,2025-11-07
-11-12,M,1650 Free,1385.99,Matthew W Alred,2025-01-17
+11-12,M,1650 Free,1285.92,Matthew W Alred,2026-10-29
 11-12,M,50 Back,30.0,Gage Martin,2025-02-07
 11-12,M,100 Back,65.56,Jace C Duncan,2026-10-03
 11-12,M,200 Back,171.39,Will Weathers,2021-10-22
@@ -116,6 +120,7 @@ Agegroup,Gender,Event,Time,Name,Date
 11-12,M,25 Fly,14.14,Jace Duncan,2025-10-17
 11-12,M,50 Fly,28.09,Jace C Duncan,2026-10-03
 11-12,M,100 Fly,63.96,Jace C Duncan,2026-10-03
+11-12,M,200 Fly,199.99,Nathaniel Lewis,2026-10-29
 11-12,M,100 IM,67.27,Jacob P Franklin,2025-02-07
 11-12,M,200 IM,151.4,Michael W Alred,2024-12-06
 11-12,M,400 IM,317.54,Michael W Alred,2024-11-08
@@ -144,7 +149,7 @@ Agegroup,Gender,Event,Time,Name,Date
 13-14,M,200 Free,117.09,Brody K Franklin,2025-02-07
 13-14,M,500 Free,336.29,Brody K Franklin,2025-02-07
 13-14,M,1000 Free,694.9,Michael W Alred,2026-01-30
-13-14,M,1650 Free,1255.17,Andrew Watts,2024-02-02
+13-14,M,1650 Free,1195.07,Jacob P Franklin,2026-10-29
 13-14,M,25 Back,14.37,Brody Franklin,2023-11-04
 13-14,M,50 Back,27.42,Gage Martin,2026-10-03
 13-14,M,100 Back,60.28,Hayden Williams,2023-02-24
@@ -162,7 +167,7 @@ Senior,F,25 Free,12.51,Liza Kate Edwards,2022-07-29
 Senior,F,50 Free,25.73,Bailee Parks,2019-01-25
 Senior,F,100 Free,58.27,Mkayla Still,2019-01-25
 Senior,F,200 Free,134.03,Bailee Parks,2023-01-28
-Senior,F,500 Free,370.38,Liza Kate Edwards,2023-02-04
+Senior,F,500 Free,363.3,Bella Hays,2026-10-29
 Senior,F,1000 Free,793.17,Aubrey Lang,2025-11-07
 Senior,F,1650 Free,1398.97,Aubrey Lang,2026-01-16
 Senior,F,50 Back,32.7,Anderly Shumate,2026-02-06
