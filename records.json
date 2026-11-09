@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-10-29T21:59:25.540757",
+  "last_updated": "2026-11-09T12:10:25.418213",
   "team": "MCSC",
-  "meet_processed": "2026 MCSC Halloween Bash",
-  "total_records": 203,
+  "meet_processed": "MSA Veterans Day Meet 2026",
+  "total_records": 204,
   "groups": [
     {
       "agegroup": "6U",
@@ -217,17 +217,17 @@
       "gender": "F",
       "gender_name": "Girls",
       "title": "8U Girls",
-      "count": 15,
+      "count": 16,
       "records": [
         {
           "event": "25 Free",
           "stroke": "Free",
           "distance": 25,
-          "time": 16.19,
-          "time_formatted": "16.19",
-          "name": "Tessa Kate Watkins",
-          "date": "2023-01-07",
-          "is_new": false
+          "time": 15.77,
+          "time_formatted": "15.77",
+          "name": "Finley Lewis",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "50 Free",
@@ -260,24 +260,34 @@
           "is_new": false
         },
         {
+          "event": "500 Free",
+          "stroke": "Free",
+          "distance": 500,
+          "time": 476.32,
+          "time_formatted": "7:56.32",
+          "name": "Finley Lewis",
+          "date": "2026-11-06",
+          "is_new": true
+        },
+        {
           "event": "25 Back",
           "stroke": "Back",
           "distance": 25,
-          "time": 19.97,
-          "time_formatted": "19.97",
-          "name": "Tessa Kate Watkins",
-          "date": "2022-11-13",
-          "is_new": false
+          "time": 19.16,
+          "time_formatted": "19.16",
+          "name": "Finley Lewis",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "50 Back",
           "stroke": "Back",
           "distance": 50,
-          "time": 42.55,
-          "time_formatted": "42.55",
-          "name": "Finley T Lewis",
-          "date": "2026-10-03",
-          "is_new": false
+          "time": 41.69,
+          "time_formatted": "41.69",
+          "name": "Finley Lewis",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "100 Back",
@@ -323,21 +333,21 @@
           "event": "25 Fly",
           "stroke": "Fly",
           "distance": 25,
-          "time": 18.25,
-          "time_formatted": "18.25",
-          "name": "Tessa Kate Watkins",
-          "date": "2023-01-28",
-          "is_new": false
+          "time": 16.55,
+          "time_formatted": "16.55",
+          "name": "Finley Lewis",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "50 Fly",
           "stroke": "Fly",
           "distance": 50,
-          "time": 46.11,
-          "time_formatted": "46.11",
+          "time": 43.3,
+          "time_formatted": "43.30",
           "name": "Finley Lewis",
-          "date": "2025-11-07",
-          "is_new": false
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "100 Fly",
@@ -774,7 +784,7 @@
           "time_formatted": "25:35.55",
           "name": "Maxwell Alred",
           "date": "2026-10-29",
-          "is_new": true
+          "is_new": false
         },
         {
           "event": "25 Back",
@@ -844,7 +854,7 @@
           "time_formatted": "3:56.76",
           "name": "William Giddens",
           "date": "2026-10-29",
-          "is_new": true
+          "is_new": false
         },
         {
           "event": "25 Fly",
@@ -919,11 +929,11 @@
           "event": "50 Free",
           "stroke": "Free",
           "distance": 50,
-          "time": 29.62,
-          "time_formatted": "29.62",
-          "name": "Gray Gilbreath",
-          "date": "2022-10-15",
-          "is_new": false
+          "time": 29.34,
+          "time_formatted": "29.34",
+          "name": "Flora Yates",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "100 Free",
@@ -939,11 +949,11 @@
           "event": "200 Free",
           "stroke": "Free",
           "distance": 200,
-          "time": 148.5,
-          "time_formatted": "2:28.50",
-          "name": "Tessa Cook",
-          "date": "2025-11-07",
-          "is_new": false
+          "time": 139.5,
+          "time_formatted": "2:19.50",
+          "name": "Flora Yates",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "500 Free",
@@ -973,7 +983,7 @@
           "time_formatted": "22:59.44",
           "name": "Tessa Cook",
           "date": "2026-10-29",
-          "is_new": true
+          "is_new": false
         },
         {
           "event": "25 Back",
@@ -1079,10 +1089,10 @@
           "event": "200 Fly",
           "stroke": "Fly",
           "distance": 200,
-          "time": 198.02,
-          "time_formatted": "3:18.02",
+          "time": 187.66,
+          "time_formatted": "3:07.66",
           "name": "Flora Yates",
-          "date": "2026-10-29",
+          "date": "2026-11-06",
           "is_new": true
         },
         {
@@ -1158,21 +1168,21 @@
           "event": "200 Free",
           "stroke": "Free",
           "distance": 200,
-          "time": 128.77,
-          "time_formatted": "2:08.77",
-          "name": "Jacob P Franklin",
-          "date": "2025-01-17",
-          "is_new": false
+          "time": 126.69,
+          "time_formatted": "2:06.69",
+          "name": "Jace Duncan",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "500 Free",
           "stroke": "Free",
           "distance": 500,
-          "time": 354.78,
-          "time_formatted": "5:54.78",
-          "name": "Jacob P Franklin",
-          "date": "2025-02-07",
-          "is_new": false
+          "time": 339.94,
+          "time_formatted": "5:39.94",
+          "name": "Jace Duncan",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "1000 Free",
@@ -1192,7 +1202,7 @@
           "time_formatted": "21:25.92",
           "name": "Matthew W Alred",
           "date": "2026-10-29",
-          "is_new": true
+          "is_new": false
         },
         {
           "event": "50 Back",
@@ -1218,11 +1228,11 @@
           "event": "200 Back",
           "stroke": "Back",
           "distance": 200,
-          "time": 171.39,
-          "time_formatted": "2:51.39",
-          "name": "Will Weathers",
-          "date": "2021-10-22",
-          "is_new": false
+          "time": 138.7,
+          "time_formatted": "2:18.70",
+          "name": "Jace Duncan",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "50 Breast",
@@ -1248,11 +1258,11 @@
           "event": "200 Breast",
           "stroke": "Breast",
           "distance": 200,
-          "time": 180.62,
-          "time_formatted": "3:00.62",
-          "name": "Matthew W Alred",
-          "date": "2025-10-17",
-          "is_new": false
+          "time": 163.76,
+          "time_formatted": "2:43.76",
+          "name": "Jace Duncan",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "25 Fly",
@@ -1278,20 +1288,20 @@
           "event": "100 Fly",
           "stroke": "Fly",
           "distance": 100,
-          "time": 63.96,
-          "time_formatted": "1:03.96",
-          "name": "Jace C Duncan",
-          "date": "2026-10-03",
-          "is_new": false
+          "time": 62.57,
+          "time_formatted": "1:02.57",
+          "name": "Jace Duncan",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "200 Fly",
           "stroke": "Fly",
           "distance": 200,
-          "time": 199.99,
-          "time_formatted": "3:19.99",
-          "name": "Nathaniel Lewis",
-          "date": "2026-10-29",
+          "time": 142.68,
+          "time_formatted": "2:22.68",
+          "name": "Jace Duncan",
+          "date": "2026-11-06",
           "is_new": true
         },
         {
@@ -1308,11 +1318,11 @@
           "event": "200 IM",
           "stroke": "IM",
           "distance": 200,
-          "time": 151.4,
-          "time_formatted": "2:31.40",
-          "name": "Michael W Alred",
-          "date": "2024-12-06",
-          "is_new": false
+          "time": 141.09,
+          "time_formatted": "2:21.09",
+          "name": "Jace Duncan",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "400 IM",
@@ -1387,11 +1397,11 @@
           "event": "1000 Free",
           "stroke": "Free",
           "distance": 1000,
-          "time": 799.89,
-          "time_formatted": "13:19.89",
-          "name": "Aubrey Lang",
-          "date": "2024-11-08",
-          "is_new": false
+          "time": 794.66,
+          "time_formatted": "13:14.66",
+          "name": "Tessa Cook",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "1650 Free",
@@ -1576,11 +1586,11 @@
           "event": "500 Free",
           "stroke": "Free",
           "distance": 500,
-          "time": 336.29,
-          "time_formatted": "5:36.29",
-          "name": "Brody K Franklin",
-          "date": "2025-02-07",
-          "is_new": false
+          "time": 325.94,
+          "time_formatted": "5:25.94",
+          "name": "Jacob P Franklin",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "1000 Free",
@@ -1616,31 +1626,31 @@
           "event": "50 Back",
           "stroke": "Back",
           "distance": 50,
-          "time": 27.42,
-          "time_formatted": "27.42",
+          "time": 27.29,
+          "time_formatted": "27.29",
           "name": "Gage Martin",
-          "date": "2026-10-03",
-          "is_new": false
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "100 Back",
           "stroke": "Back",
           "distance": 100,
-          "time": 60.28,
-          "time_formatted": "1:00.28",
-          "name": "Hayden Williams",
-          "date": "2023-02-24",
-          "is_new": false
+          "time": 58.76,
+          "time_formatted": "58.76",
+          "name": "Gage Martin",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "200 Back",
           "stroke": "Back",
           "distance": 200,
-          "time": 132.61,
-          "time_formatted": "2:12.61",
-          "name": "Hayden Williams",
-          "date": "2023-02-24",
-          "is_new": false
+          "time": 130.7,
+          "time_formatted": "2:10.70",
+          "name": "Gage Martin",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "50 Breast",
@@ -1676,11 +1686,11 @@
           "event": "50 Fly",
           "stroke": "Fly",
           "distance": 50,
-          "time": 27.66,
-          "time_formatted": "27.66",
+          "time": 27.31,
+          "time_formatted": "27.31",
           "name": "Gage Martin",
-          "date": "2026-10-03",
-          "is_new": false
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "100 Fly",
@@ -1716,11 +1726,11 @@
           "event": "200 IM",
           "stroke": "IM",
           "distance": 200,
-          "time": 137.96,
-          "time_formatted": "2:17.96",
-          "name": "Michael W Alred",
-          "date": "2026-02-06",
-          "is_new": false
+          "time": 135.39,
+          "time_formatted": "2:15.39",
+          "name": "Jacob P Franklin",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "400 IM",
@@ -1789,7 +1799,7 @@
           "time_formatted": "6:03.30",
           "name": "Bella Hays",
           "date": "2026-10-29",
-          "is_new": true
+          "is_new": false
         },
         {
           "event": "1000 Free",
@@ -2044,11 +2054,11 @@
           "event": "200 Back",
           "stroke": "Back",
           "distance": 200,
-          "time": 141.94,
-          "time_formatted": "2:21.94",
-          "name": "William Weathers",
-          "date": "2025-12-05",
-          "is_new": false
+          "time": 141.36,
+          "time_formatted": "2:21.36",
+          "name": "Judah Davis",
+          "date": "2026-11-06",
+          "is_new": true
         },
         {
           "event": "50 Breast",
@@ -2338,11 +2348,11 @@
       "agegroup": "8U",
       "gender": "F",
       "event": "25 Free",
-      "time": 16.19,
-      "time_formatted": "16.19",
-      "name": "Tessa Kate Watkins",
-      "date": "2023-01-07",
-      "is_new": false
+      "time": 15.77,
+      "time_formatted": "15.77",
+      "name": "Finley Lewis",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "8U",
@@ -2377,22 +2387,32 @@
     {
       "agegroup": "8U",
       "gender": "F",
+      "event": "500 Free",
+      "time": 476.32,
+      "time_formatted": "7:56.32",
+      "name": "Finley Lewis",
+      "date": "2026-11-06",
+      "is_new": true
+    },
+    {
+      "agegroup": "8U",
+      "gender": "F",
       "event": "25 Back",
-      "time": 19.97,
-      "time_formatted": "19.97",
-      "name": "Tessa Kate Watkins",
-      "date": "2022-11-13",
-      "is_new": false
+      "time": 19.16,
+      "time_formatted": "19.16",
+      "name": "Finley Lewis",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "8U",
       "gender": "F",
       "event": "50 Back",
-      "time": 42.55,
-      "time_formatted": "42.55",
-      "name": "Finley T Lewis",
-      "date": "2026-10-03",
-      "is_new": false
+      "time": 41.69,
+      "time_formatted": "41.69",
+      "name": "Finley Lewis",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "8U",
@@ -2438,21 +2458,21 @@
       "agegroup": "8U",
       "gender": "F",
       "event": "25 Fly",
-      "time": 18.25,
-      "time_formatted": "18.25",
-      "name": "Tessa Kate Watkins",
-      "date": "2023-01-28",
-      "is_new": false
+      "time": 16.55,
+      "time_formatted": "16.55",
+      "name": "Finley Lewis",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "8U",
       "gender": "F",
       "event": "50 Fly",
-      "time": 46.11,
-      "time_formatted": "46.11",
+      "time": 43.3,
+      "time_formatted": "43.30",
       "name": "Finley Lewis",
-      "date": "2025-11-07",
-      "is_new": false
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "8U",
@@ -2862,7 +2882,7 @@
       "time_formatted": "25:35.55",
       "name": "Maxwell Alred",
       "date": "2026-10-29",
-      "is_new": true
+      "is_new": false
     },
     {
       "agegroup": "9-10",
@@ -2932,7 +2952,7 @@
       "time_formatted": "3:56.76",
       "name": "William Giddens",
       "date": "2026-10-29",
-      "is_new": true
+      "is_new": false
     },
     {
       "agegroup": "9-10",
@@ -2998,11 +3018,11 @@
       "agegroup": "11-12",
       "gender": "F",
       "event": "50 Free",
-      "time": 29.62,
-      "time_formatted": "29.62",
-      "name": "Gray Gilbreath",
-      "date": "2022-10-15",
-      "is_new": false
+      "time": 29.34,
+      "time_formatted": "29.34",
+      "name": "Flora Yates",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "11-12",
@@ -3018,11 +3038,11 @@
       "agegroup": "11-12",
       "gender": "F",
       "event": "200 Free",
-      "time": 148.5,
-      "time_formatted": "2:28.50",
-      "name": "Tessa Cook",
-      "date": "2025-11-07",
-      "is_new": false
+      "time": 139.5,
+      "time_formatted": "2:19.50",
+      "name": "Flora Yates",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "11-12",
@@ -3052,7 +3072,7 @@
       "time_formatted": "22:59.44",
       "name": "Tessa Cook",
       "date": "2026-10-29",
-      "is_new": true
+      "is_new": false
     },
     {
       "agegroup": "11-12",
@@ -3158,10 +3178,10 @@
       "agegroup": "11-12",
       "gender": "F",
       "event": "200 Fly",
-      "time": 198.02,
-      "time_formatted": "3:18.02",
+      "time": 187.66,
+      "time_formatted": "3:07.66",
       "name": "Flora Yates",
-      "date": "2026-10-29",
+      "date": "2026-11-06",
       "is_new": true
     },
     {
@@ -3228,21 +3248,21 @@
       "agegroup": "11-12",
       "gender": "M",
       "event": "200 Free",
-      "time": 128.77,
-      "time_formatted": "2:08.77",
-      "name": "Jacob P Franklin",
-      "date": "2025-01-17",
-      "is_new": false
+      "time": 126.69,
+      "time_formatted": "2:06.69",
+      "name": "Jace Duncan",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "11-12",
       "gender": "M",
       "event": "500 Free",
-      "time": 354.78,
-      "time_formatted": "5:54.78",
-      "name": "Jacob P Franklin",
-      "date": "2025-02-07",
-      "is_new": false
+      "time": 339.94,
+      "time_formatted": "5:39.94",
+      "name": "Jace Duncan",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "11-12",
@@ -3262,7 +3282,7 @@
       "time_formatted": "21:25.92",
       "name": "Matthew W Alred",
       "date": "2026-10-29",
-      "is_new": true
+      "is_new": false
     },
     {
       "agegroup": "11-12",
@@ -3288,11 +3308,11 @@
       "agegroup": "11-12",
       "gender": "M",
       "event": "200 Back",
-      "time": 171.39,
-      "time_formatted": "2:51.39",
-      "name": "Will Weathers",
-      "date": "2021-10-22",
-      "is_new": false
+      "time": 138.7,
+      "time_formatted": "2:18.70",
+      "name": "Jace Duncan",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "11-12",
@@ -3318,11 +3338,11 @@
       "agegroup": "11-12",
       "gender": "M",
       "event": "200 Breast",
-      "time": 180.62,
-      "time_formatted": "3:00.62",
-      "name": "Matthew W Alred",
-      "date": "2025-10-17",
-      "is_new": false
+      "time": 163.76,
+      "time_formatted": "2:43.76",
+      "name": "Jace Duncan",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "11-12",
@@ -3348,20 +3368,20 @@
       "agegroup": "11-12",
       "gender": "M",
       "event": "100 Fly",
-      "time": 63.96,
-      "time_formatted": "1:03.96",
-      "name": "Jace C Duncan",
-      "date": "2026-10-03",
-      "is_new": false
+      "time": 62.57,
+      "time_formatted": "1:02.57",
+      "name": "Jace Duncan",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "11-12",
       "gender": "M",
       "event": "200 Fly",
-      "time": 199.99,
-      "time_formatted": "3:19.99",
-      "name": "Nathaniel Lewis",
-      "date": "2026-10-29",
+      "time": 142.68,
+      "time_formatted": "2:22.68",
+      "name": "Jace Duncan",
+      "date": "2026-11-06",
       "is_new": true
     },
     {
@@ -3378,11 +3398,11 @@
       "agegroup": "11-12",
       "gender": "M",
       "event": "200 IM",
-      "time": 151.4,
-      "time_formatted": "2:31.40",
-      "name": "Michael W Alred",
-      "date": "2024-12-06",
-      "is_new": false
+      "time": 141.09,
+      "time_formatted": "2:21.09",
+      "name": "Jace Duncan",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "11-12",
@@ -3448,11 +3468,11 @@
       "agegroup": "13-14",
       "gender": "F",
       "event": "1000 Free",
-      "time": 799.89,
-      "time_formatted": "13:19.89",
-      "name": "Aubrey Lang",
-      "date": "2024-11-08",
-      "is_new": false
+      "time": 794.66,
+      "time_formatted": "13:14.66",
+      "name": "Tessa Cook",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "13-14",
@@ -3628,11 +3648,11 @@
       "agegroup": "13-14",
       "gender": "M",
       "event": "500 Free",
-      "time": 336.29,
-      "time_formatted": "5:36.29",
-      "name": "Brody K Franklin",
-      "date": "2025-02-07",
-      "is_new": false
+      "time": 325.94,
+      "time_formatted": "5:25.94",
+      "name": "Jacob P Franklin",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "13-14",
@@ -3668,31 +3688,31 @@
       "agegroup": "13-14",
       "gender": "M",
       "event": "50 Back",
-      "time": 27.42,
-      "time_formatted": "27.42",
+      "time": 27.29,
+      "time_formatted": "27.29",
       "name": "Gage Martin",
-      "date": "2026-10-03",
-      "is_new": false
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "13-14",
       "gender": "M",
       "event": "100 Back",
-      "time": 60.28,
-      "time_formatted": "1:00.28",
-      "name": "Hayden Williams",
-      "date": "2023-02-24",
-      "is_new": false
+      "time": 58.76,
+      "time_formatted": "58.76",
+      "name": "Gage Martin",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "13-14",
       "gender": "M",
       "event": "200 Back",
-      "time": 132.61,
-      "time_formatted": "2:12.61",
-      "name": "Hayden Williams",
-      "date": "2023-02-24",
-      "is_new": false
+      "time": 130.7,
+      "time_formatted": "2:10.70",
+      "name": "Gage Martin",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "13-14",
@@ -3728,11 +3748,11 @@
       "agegroup": "13-14",
       "gender": "M",
       "event": "50 Fly",
-      "time": 27.66,
-      "time_formatted": "27.66",
+      "time": 27.31,
+      "time_formatted": "27.31",
       "name": "Gage Martin",
-      "date": "2026-10-03",
-      "is_new": false
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "13-14",
@@ -3768,11 +3788,11 @@
       "agegroup": "13-14",
       "gender": "M",
       "event": "200 IM",
-      "time": 137.96,
-      "time_formatted": "2:17.96",
-      "name": "Michael W Alred",
-      "date": "2026-02-06",
-      "is_new": false
+      "time": 135.39,
+      "time_formatted": "2:15.39",
+      "name": "Jacob P Franklin",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "13-14",
@@ -3832,7 +3852,7 @@
       "time_formatted": "6:03.30",
       "name": "Bella Hays",
       "date": "2026-10-29",
-      "is_new": true
+      "is_new": false
     },
     {
       "agegroup": "Senior",
@@ -4078,11 +4098,11 @@
       "agegroup": "Senior",
       "gender": "M",
       "event": "200 Back",
-      "time": 141.94,
-      "time_formatted": "2:21.94",
-      "name": "William Weathers",
-      "date": "2025-12-05",
-      "is_new": false
+      "time": 141.36,
+      "time_formatted": "2:21.36",
+      "name": "Judah Davis",
+      "date": "2026-11-06",
+      "is_new": true
     },
     {
       "agegroup": "Senior",
